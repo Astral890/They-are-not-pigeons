@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private int currentMoney = 0;
+    [SerializeField] private PlayerStats player;
     public UIManager uiManager;
 
-    public void addMoney(int amount)
+    private void Awake()
     {
-        currentMoney += amount;
-        uiManager.updateMoney(currentMoney);
+        uiManager.BindPlayer(player);
+    }
+
+    public void giveMoney(int amount)
+    {
+        player.AddMoney(amount);
+        uiManager.updateMoney(player.GetMoney());
     }
 }

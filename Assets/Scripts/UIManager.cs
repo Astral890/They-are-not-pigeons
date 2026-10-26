@@ -1,36 +1,32 @@
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI promptText;
+    [SerializeField] private TextMeshProUGUI promptMsg;
     [SerializeField] private TextMeshProUGUI money;
-    [SerializeField] private TextMeshProUGUI cohesion;
-    [SerializeField] private TextMeshProUGUI coherence;
+    [SerializeField] private HungerUI hungerUI;
 
     public void showPromptText(string text)
     {
-        promptText.text = text;
-        promptText.gameObject.SetActive(true);
+        promptMsg.text = text;
+        promptMsg.gameObject.SetActive(true);
     }
 
     public void hidePromptText()
     {
-        promptText.gameObject.SetActive(false);
+        promptMsg.gameObject.SetActive(false);
     }
 
     public void updateMoney(int value)
     {
-        money.text = "$" + value.ToString();
+        money.text =value.ToString();
     }
 
-    public void updateCohesion(int value)
+    public void BindPlayer(PlayerStats player)
     {
-        cohesion.text = "Cohesion: " + value.ToString();
-    }
-
-    public void updateCoherence(int value)
-    {
-        coherence.text = "Coherence: " + value.ToString();
+        player.OnHungerChanged += hungerUI.UpdateBar;
+        hungerUI.UpdateBar(player.GetHunger());
     }
 }

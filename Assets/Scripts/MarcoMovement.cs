@@ -20,10 +20,25 @@ public class marcoMovement : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
 
+    public InputActionReference interact;
+    private FountainController currentFountain;
+
     private CharacterController controller;
     private Vector3 verticalVelocity;
     private bool isGrounded;
     private float xRotation = 0.0f;
+
+    private void OnEnable()
+    {
+        interact.action.Enable();
+        interact.action.performed += OnInteract;
+    }
+
+    private void OnDisable()
+    {
+        interact.action.performed -= OnInteract;
+        interact.action.Disable();
+    }
 
     void Start()
     {
@@ -73,5 +88,18 @@ public class marcoMovement : MonoBehaviour
         // 4. ANIMATION
         if (animator != null && animator.runtimeAnimatorController != null)
             animator.SetFloat("Speed", direction.magnitude, 0.1f, Time.deltaTime);
+    }
+
+    public void SetCurrentFountain(FountainController fountain)
+    {
+        currentFountain = fountain;
+    }
+
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if(currentFountain != null)
+        {
+            currentFountain.Interact();
+        }
     }
 }

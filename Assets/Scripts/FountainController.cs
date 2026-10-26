@@ -6,7 +6,7 @@ public class FountainController : MonoBehaviour
     [SerializeField] private int availableCoins = 3;
     [SerializeField] private string promptMessage = "Presiona E para recoger moneda";
     private bool isPlayerInside = false;
-    private PlayerMovement playerRef;
+    private marcoMovement playerRef;
     public GameManager gameManager;
     public UIManager uiManager;
 
@@ -16,8 +16,8 @@ public class FountainController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInside = true;
-            playerRef = other.GetComponent<PlayerMovement>();
-            playerRef.setCurrentFountain(this);
+            playerRef = other.GetComponent<marcoMovement>();
+            playerRef.SetCurrentFountain(this);
 
             if (availableCoins > 0)
             {
@@ -28,6 +28,10 @@ public class FountainController : MonoBehaviour
                 uiManager.showPromptText("La fuente ya no tiene monedas");
             }
         }
+        else
+        {
+            Debug.Log("No es la tag");
+        }
     }
 
     public void OnTriggerExit(Collider other)
@@ -37,7 +41,7 @@ public class FountainController : MonoBehaviour
             isPlayerInside = false;
             if (playerRef != null)
             {
-                playerRef.setCurrentFountain(null);
+                playerRef.SetCurrentFountain(null);
                 playerRef = null;
             }
             uiManager.hidePromptText();
@@ -49,7 +53,7 @@ public class FountainController : MonoBehaviour
         if(isPlayerInside&& availableCoins > 0)
         {
             availableCoins--;
-            gameManager.addMoney(1);
+            gameManager.giveMoney(1);
             if (availableCoins <= 0)
             {
                 uiManager.showPromptText("La fuente ha quedado vacia");
