@@ -10448,8 +10448,16 @@ PrefabInstance:
       value: marco
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 04a35f7987cbebe47bc18d219910a375, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5db9f2d498b075949a8d198a7fc1ab8e, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 04a35f7987cbebe47bc18d219910a375, type: 3}
       propertyPath: m_AnimatePhysics
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 04a35f7987cbebe47bc18d219910a375, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
