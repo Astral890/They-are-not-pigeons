@@ -87,7 +87,9 @@ public class marcoMovement : MonoBehaviour
 
         // 4. ANIMATION
         if (animator != null && animator.runtimeAnimatorController != null)
-            animator.SetFloat("Speed", direction.magnitude, 0.1f, Time.deltaTime);
+        {
+            animator.SetBool("IsWalking", direction.sqrMagnitude > 0.01f);
+        }
     }
 
     public void SetCurrentFountain(FountainController fountain)
