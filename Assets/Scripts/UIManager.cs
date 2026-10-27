@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI promptMsg;
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private HungerUI hungerUI;
+    [SerializeField] private GameObject shopPanel;
 
     public void showPromptText(string text)
     {
@@ -28,5 +29,15 @@ public class UIManager : MonoBehaviour
     {
         player.OnHungerChanged += hungerUI.UpdateBar;
         hungerUI.UpdateBar(player.GetHunger());
+    }
+
+    public void showStore()
+    {
+        shopPanel.SetActive(true);
+    }
+
+    public void hideStore()
+    {
+        shopPanel.SetActive(false);
     }
 }
