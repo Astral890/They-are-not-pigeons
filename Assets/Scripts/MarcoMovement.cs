@@ -27,6 +27,7 @@ public class marcoMovement : MonoBehaviour
     private Vector3 verticalVelocity;
     private bool isGrounded;
     private float xRotation = 0.0f;
+    private bool isUIOpen = false;
 
     private void OnEnable()
     {
@@ -47,8 +48,7 @@ public class marcoMovement : MonoBehaviour
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        LockCursor(false);
     }
 
     void Update()
@@ -58,13 +58,17 @@ public class marcoMovement : MonoBehaviour
         if (keyboard == null || mouse == null) return;
 
         // 1. CAMERA ROTATION
-        Vector2 mouseDelta = mouse.delta.ReadValue() * mouseSensitivity;
-        transform.Rotate(Vector3.up * mouseDelta.x);
+        Vector2 mouseDelta = isUIOpen ? Vector2.zero : mouse.delta.ReadValue() * mouseSensitivity;
 
-        xRotation -= mouseDelta.y;
-        xRotation = Mathf.Clamp(xRotation, -verticalLookLimit, verticalLookLimit);
-        if (cameraPivot != null)
-            cameraPivot.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
+        if (!isUIOpen)
+        {
+            transform.Rotate(Vector3.up * mouseDelta.x);
+
+            xRotation -= mouseDelta.y;
+            xRotation = Mathf.Clamp(xRotation, -verticalLookLimit, verticalLookLimit);
+            if (cameraPivot != null)
+                cameraPivot.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
+        }
 
         // 2. GROUND MOVEMENT
         isGrounded = controller.isGrounded;
@@ -101,5 +105,18 @@ public class marcoMovement : MonoBehaviour
         {
             currentFountain.Interact();
         }
+    }
+
+    public void SetMenuState(bool state)
+    {
+        isUIOpen = state;
+        LockCursor(state);
+        
+    }
+
+    private void LockCursor(bool state)
+    {
+        Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = state;
     }
 }

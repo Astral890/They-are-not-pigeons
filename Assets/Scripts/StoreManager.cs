@@ -39,4 +39,17 @@ public class StoreManager : MonoBehaviour
             card.GetComponent<ShopItemUI>().Setup(item, this);
         }
     }
+
+    public void TryBuyItem(ShopItems item)
+    {
+        if(gameManager.player.GetMoney() >= item.price)
+        {
+            gameManager.takeMoney(item.price);
+            Debug.Log("Compro un " + item.itemName);
+        }
+        else
+        {
+            Debug.Log("No hay dineros " + item.itemName);
+        }
+    }
 }
