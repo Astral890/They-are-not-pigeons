@@ -48,7 +48,7 @@ public class marcoMovement : MonoBehaviour
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
 
-        LockCursor(false);
+        LockCursor(true);
     }
 
     void Update()
