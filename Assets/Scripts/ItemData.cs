@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewShopItem", menuName = "Shop/Items")]
-public class ShopItems : ScriptableObject
+[CreateAssetMenu(fileName = "NewItem", menuName = "Items/New Item")]
+public class ItemData : ScriptableObject
 {
-    public string itemId;
+    public string id;
     public string itemName;
     [TextArea] public string description;
     public Sprite icon;
