@@ -9,7 +9,7 @@ public class ShopItemUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI priceText;
     [SerializeField] private Button buyButton;
 
-    public void Setup(ShopItems item, StoreManager storeManager)
+    public void Setup(ItemData item, StoreManager storeManager)
     {
         itemIcon.sprite = item.icon;
         titleText.text = item.itemName;
@@ -17,7 +17,7 @@ public class ShopItemUI : MonoBehaviour
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() => BuyItem(item, storeManager));
     }
-     private void BuyItem(ShopItems item, StoreManager storeManager)
+     private void BuyItem(ItemData item, StoreManager storeManager)
     {
         storeManager.TryBuyItem(item);
     }

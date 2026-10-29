@@ -5,7 +5,7 @@ public class StoreManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private List<ShopItems> shopItems;
+    [SerializeField] private List<ItemData> shopItems;
     [SerializeField] private Transform itemsContainer;
     [SerializeField] private GameObject itemCardPrefab;
 
@@ -26,7 +26,7 @@ public class StoreManager : MonoBehaviour
         }
     }
 
-    private void PopulateStore(List<ShopItems> items)
+    private void PopulateStore(List<ItemData> items)
     {
         foreach (Transform child in itemsContainer)
         {
@@ -40,12 +40,12 @@ public class StoreManager : MonoBehaviour
         }
     }
 
-    public void TryBuyItem(ShopItems item)
+    public void TryBuyItem(ItemData item)
     {
         if(gameManager.player.GetMoney() >= item.price)
         {
             gameManager.takeMoney(item.price);
-            Debug.Log("Compro un " + item.itemName);
+            gameManager.playerInventory.AddItem(item);
         }
         else
         {
