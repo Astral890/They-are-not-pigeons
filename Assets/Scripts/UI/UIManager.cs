@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private HungerUI hungerUI;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private marcoMovement player;
+    [SerializeField] private GameObject InventoryPanel;
 
     public void showPromptText(string text)
     {
@@ -41,5 +43,10 @@ public class UIManager : MonoBehaviour
     {
         shopPanel.SetActive(false);
         player.SetMenuState(false);
+    }
+
+    public void OpenInventory(bool flag)
+    {
+        InventoryPanel.SetActive(flag);
     }
 }

@@ -1,16 +1,21 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 public class PlayerInventory : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] public List<ItemData> items = new List<ItemData>();
+    public event Action OnInventoryUpdate;
+
+    public void AddItem(ItemData newItem)
     {
-        
+        items.Add(newItem);
+        OnInventoryUpdate?.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RemoveItem(ItemData removeItem)
     {
-        
+        items.Remove(removeItem);
+        OnInventoryUpdate?.Invoke();
     }
 }

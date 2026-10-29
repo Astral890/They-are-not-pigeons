@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -20,7 +21,8 @@ public class marcoMovement : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
 
-    public InputActionReference interact;
+    [SerializeField] private InputActionReference interact;
+    [SerializeField] private InputActionReference openInventory;
     private FountainController currentFountain;
 
     private CharacterController controller;
@@ -29,10 +31,14 @@ public class marcoMovement : MonoBehaviour
     private float xRotation = 0.0f;
     private bool isUIOpen = false;
 
+    [SerializeField] private GameManager gameManager;
+
     private void OnEnable()
     {
         interact.action.Enable();
+        openInventory.action.Enable();
         interact.action.performed += OnInteract;
+        openInventory.action.performed += OnOpenInventory;
     }
 
     private void OnDisable()
@@ -118,5 +124,12 @@ public class marcoMovement : MonoBehaviour
     {
         Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = state;
+    }
+
+    private void OnOpenInventory(InputAction.CallbackContext context)
+    {
+        isUIOpen = !isUIOpen;
+        gameManager.uiManager.OpenInventory(isUIOpen);
+        LockCursor(isUIOpen);
     }
 }

@@ -5069,6 +5069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player: {fileID: 1406870381}
+  playerInventory: {fileID: 1406870382}
   uiManager: {fileID: 665540333}
 --- !u!4 &582381677
 Transform:
@@ -5705,6 +5706,7 @@ MonoBehaviour:
   hungerUI: {fileID: 665540338}
   shopPanel: {fileID: 267311945}
   player: {fileID: 1406870378}
+  InventoryPanel: {fileID: 1065587728}
 --- !u!224 &665540334
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8508,6 +8510,7 @@ GameObject:
   - component: {fileID: 1065587732}
   - component: {fileID: 1065587731}
   - component: {fileID: 1065587730}
+  - component: {fileID: 1065587733}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -8605,6 +8608,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065587728}
   m_CullTransparentMesh: 1
+--- !u!114 &1065587733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065587728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02d5ac67cd89bb90bae217dbfcc0a7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  slotPrefab: {fileID: 2228990210497533242, guid: 6e854a9478161d4e082f53c601933c2c, type: 3}
+  content: {fileID: 1602753401}
+  initialSlots: 20
+  gameManager: {fileID: 582381676}
 --- !u!1001 &1066709034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10303,6 +10322,7 @@ GameObject:
   - component: {fileID: 1406870378}
   - component: {fileID: 1406870380}
   - component: {fileID: 1406870381}
+  - component: {fileID: 1406870382}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10347,6 +10367,8 @@ MonoBehaviour:
   verticalLookLimit: 80
   animator: {fileID: 0}
   interact: {fileID: -8630175888484527620, guid: 274237da594b1c31f8c24222b7953e4d, type: 3}
+  openInventory: {fileID: -386298739604104900, guid: 274237da594b1c31f8c24222b7953e4d, type: 3}
+  gameManager: {fileID: 582381676}
 --- !u!143 &1406870379
 CharacterController:
   m_ObjectHideFlags: 0
@@ -10418,6 +10440,19 @@ MonoBehaviour:
   maxHunger: 100
   hunger: 100
   hungerDownMinute: 0
+--- !u!114 &1406870382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406870376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c0782d776debc7da6a8e0e9422aefe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  items: []
 --- !u!1 &1413690553 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e11730f7701936546b077966188619a4, type: 3}
@@ -11933,7 +11968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -52.979713}
+  m_AnchoredPosition: {x: 0, y: -52.97939}
   m_SizeDelta: {x: -87, y: 0}
   m_Pivot: {x: 0.5, y: 0.94}
 --- !u!114 &1602753402

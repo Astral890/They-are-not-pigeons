@@ -45,7 +45,7 @@ public class StoreManager : MonoBehaviour
         if(gameManager.player.GetMoney() >= item.price)
         {
             gameManager.takeMoney(item.price);
-            Debug.Log("Compro un " + item.itemName);
+            gameManager.playerInventory.AddItem(item);
         }
         else
         {
