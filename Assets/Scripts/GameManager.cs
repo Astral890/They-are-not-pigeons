@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PlayerStats player;
+    public PlayerStats player;
     public UIManager uiManager;
 
     private void Awake()
@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour
     public void giveMoney(int amount)
     {
         player.AddMoney(amount);
+        uiManager.updateMoney(player.GetMoney());
+    }
+
+    public void takeMoney(int amount)
+    {
+        player.RemoveMoney(amount);
         uiManager.updateMoney(player.GetMoney());
     }
 }

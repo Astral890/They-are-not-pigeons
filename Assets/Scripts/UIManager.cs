@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +7,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private HungerUI hungerUI;
     [SerializeField] private GameObject shopPanel;
+    [SerializeField] private marcoMovement player;
 
     public void showPromptText(string text)
     {
@@ -34,10 +34,12 @@ public class UIManager : MonoBehaviour
     public void showStore()
     {
         shopPanel.SetActive(true);
+        player.SetMenuState(true);
     }
 
     public void hideStore()
     {
         shopPanel.SetActive(false);
+        player.SetMenuState(false);
     }
 }

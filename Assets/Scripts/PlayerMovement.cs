@@ -55,4 +55,9 @@ public class PlayerMovement : MonoBehaviour
             currentFountain.Interact();
         }
     }
+
+    public void SetControl(bool status)
+    {
+        
+    }
 }

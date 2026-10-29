@@ -28,6 +28,15 @@ public class PlayerStats : MonoBehaviour
         return currentMoney;
     }
 
+    public void RemoveMoney(int amount)
+    {
+        currentMoney -= amount;
+        if (currentMoney < 0)
+        {
+            currentMoney = 0;
+        }
+    }
+
     public float GetHunger()
     {
         return hunger;
@@ -43,7 +52,7 @@ public class PlayerStats : MonoBehaviour
         OnHungerChanged?.Invoke(hunger);
     }
 
-    private void eat(float amount)
+    public void eat(float amount)
     {
         hunger = Mathf.Clamp(hunger + amount, 0f, maxHunger);
         OnHungerChanged?.Invoke(hunger);
