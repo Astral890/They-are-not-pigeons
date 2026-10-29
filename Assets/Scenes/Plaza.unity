@@ -5613,6 +5613,15 @@ MonoBehaviour:
   uiManager: {fileID: 665540333}
   shopItems:
   - {fileID: 11400000, guid: 910d8f11eccdbfd11b1cdbbef93595eb, type: 2}
+  - {fileID: 11400000, guid: eb930af34e289c5ffb0a5aa355d2da97, type: 2}
+  - {fileID: 11400000, guid: a92084d2a98a3f3d4be7da75abd33002, type: 2}
+  - {fileID: 11400000, guid: 21af48593115c2ee1881384173f3dfc2, type: 2}
+  - {fileID: 11400000, guid: acb7288015f9599d9951fe10ecd31f3f, type: 2}
+  - {fileID: 11400000, guid: b1e840e3e774b26e984493fb339f9133, type: 2}
+  - {fileID: 11400000, guid: 18fc870d040806abda5e081f802147a7, type: 2}
+  - {fileID: 11400000, guid: db4237e13a443fb4ba895403bf8f3aa9, type: 2}
+  - {fileID: 11400000, guid: 335810988bc198cd7811f3bca1647ea3, type: 2}
+  - {fileID: 11400000, guid: 3129cdb36cd3ecf59b04c747990962a5, type: 2}
   itemsContainer: {fileID: 1418731415}
   itemCardPrefab: {fileID: 7411866118470123225, guid: f2c6dab048a076d16830efd631532565, type: 3}
 --- !u!65 &653323088
@@ -9611,7 +9620,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1439297588}
   m_HandleRect: {fileID: 1439297587}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -10616,8 +10625,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 200, y: 266}
   m_Spacing: {x: 15, y: 15}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 5
 --- !u!222 &1418731417
 CanvasRenderer:
   m_ObjectHideFlags: 0
