@@ -1,28 +1,38 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class StoreManager : MonoBehaviour
+public class StoreManager : MonoBehaviour, InteractableE
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private List<ItemData> shopItems;
     [SerializeField] private Transform itemsContainer;
     [SerializeField] private GameObject itemCardPrefab;
-
+    private bool isPlayerInside = false;
+    private marcoMovement playerRef;
+    private bool isStoreOpen = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            uiManager.showStore();
-            PopulateStore(shopItems);
+            isPlayerInside = true;
+            playerRef = other.GetComponent<marcoMovement>();
+            playerRef.SetCurrentInteractable(this);
+            playerRef.UpdatePromptUI();
         }
+        PopulateStore(shopItems);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            uiManager.hideStore();
+            isPlayerInside = false;
+            playerRef.SetCurrentInteractable(null);
+            playerRef.UpdatePromptUI();
+            playerRef = null;
+            isStoreOpen = false;
+            uiManager.SetStoreVisibility(isStoreOpen);
         }
     }
 
@@ -51,5 +61,27 @@ public class StoreManager : MonoBehaviour
         {
             Debug.Log("No hay dineros " + item.itemName);
         }
+    }
+
+    public void Interact()
+    {
+        Debug.Log("Interacting with the store");
+        if (isPlayerInside && !isStoreOpen)
+        {
+            isStoreOpen = true;
+            uiManager.SetStoreVisibility(isStoreOpen);
+            playerRef.SetMenuState(isStoreOpen);
+        }
+        else
+        {
+            isStoreOpen = false;
+            uiManager.SetStoreVisibility(isStoreOpen);
+            playerRef.SetMenuState(isStoreOpen);
+        }
+    }
+
+    public string GetPromptMsg()
+    {
+        return "Presiona E para abrir la tienda";
     }
 }

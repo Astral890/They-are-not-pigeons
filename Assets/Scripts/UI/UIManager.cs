@@ -45,6 +45,11 @@ public class UIManager : MonoBehaviour
         player.SetMenuState(false);
     }
 
+    public void SetStoreVisibility(bool isVisible)
+    {
+        shopPanel.SetActive(isVisible);
+    }
+
     public void OpenInventory(bool flag)
     {
         InventoryPanel.SetActive(flag);

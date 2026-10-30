@@ -1,14 +1,13 @@
 using TMPro;
 using UnityEngine;
 
-public class FountainController : MonoBehaviour
+public class FountainController : MonoBehaviour, InteractableE
 {
     [SerializeField] private int availableCoins = 3;
     [SerializeField] private string promptMessage = "Presiona E para recoger moneda";
     private bool isPlayerInside = false;
     private marcoMovement playerRef;
     public GameManager gameManager;
-    public UIManager uiManager;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -17,20 +16,8 @@ public class FountainController : MonoBehaviour
         {
             isPlayerInside = true;
             playerRef = other.GetComponent<marcoMovement>();
-            playerRef.SetCurrentFountain(this);
-
-            if (availableCoins > 0)
-            {
-                uiManager.showPromptText(promptMessage);
-            }
-            else
-            {
-                uiManager.showPromptText("La fuente ya no tiene monedas");
-            }
-        }
-        else
-        {
-            Debug.Log("No es la tag");
+            playerRef.SetCurrentInteractable(this);
+            playerRef.UpdatePromptUI();
         }
     }
 
@@ -41,23 +28,33 @@ public class FountainController : MonoBehaviour
             isPlayerInside = false;
             if (playerRef != null)
             {
-                playerRef.SetCurrentFountain(null);
+                playerRef.SetCurrentInteractable(null);
+                playerRef.UpdatePromptUI();
                 playerRef = null;
-            }
-            uiManager.hidePromptText();
+            }    
         }
     }
 
     public void Interact()
     {
-        if(isPlayerInside&& availableCoins > 0)
+        if (isPlayerInside && availableCoins > 0)
         {
             availableCoins--;
             gameManager.giveMoney(1);
-            if (availableCoins <= 0)
+
+            if (playerRef != null)
             {
-                uiManager.showPromptText("La fuente ha quedado vacia");
+                playerRef.UpdatePromptUI();
             }
         }
+    }
+
+    public string GetPromptMsg()
+    {
+        if (availableCoins > 0)
+        {
+            return promptMessage;
+        }
+        return "La fuente ya no tiene monedas";
     }
 }
