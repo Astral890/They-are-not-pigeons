@@ -5623,7 +5623,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 335810988bc198cd7811f3bca1647ea3, type: 2}
   - {fileID: 11400000, guid: 3129cdb36cd3ecf59b04c747990962a5, type: 2}
   itemsContainer: {fileID: 1418731415}
-  itemCardPrefab: {fileID: 7411866118470123225, guid: f2c6dab048a076d16830efd631532565, type: 3}
+  itemCardPrefab: {fileID: 2075619981455299596, guid: 08f8dd97cfef64a598c4b99b8c8267af, type: 3}
 --- !u!65 &653323088
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10620,10 +10620,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 266}
+  m_CellSize: {x: 300, y: 399}
   m_Spacing: {x: 15, y: 15}
   m_Constraint: 1
   m_ConstraintCount: 5

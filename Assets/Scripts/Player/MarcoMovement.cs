@@ -23,7 +23,7 @@ public class marcoMovement : MonoBehaviour
 
     [SerializeField] private InputActionReference interact;
     [SerializeField] private InputActionReference openInventory;
-    private FountainController currentFountain;
+    private InteractableE currentInteractable;
 
     private CharacterController controller;
     private Vector3 verticalVelocity;
@@ -102,17 +102,10 @@ public class marcoMovement : MonoBehaviour
         }
     }
 
-    public void SetCurrentFountain(FountainController fountain)
-    {
-        currentFountain = fountain;
-    }
-
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if(currentFountain != null)
-        {
-            currentFountain.Interact();
-        }
+        if(currentInteractable.GetType() != typeof(StoreManager) && isUIOpen) return;
+        currentInteractable?.Interact();
     }
 
     public void SetMenuState(bool state)
@@ -133,5 +126,24 @@ public class marcoMovement : MonoBehaviour
         isUIOpen = !isUIOpen;
         gameManager.uiManager.OpenInventory(isUIOpen);
         LockCursor(isUIOpen);
+    }
+
+    public void SetCurrentInteractable(InteractableE interactable)
+    {
+        currentInteractable = interactable;
+
+    }
+
+    public void UpdatePromptUI()
+    {
+        if (currentInteractable != null)
+        {
+            string promptMessage = currentInteractable.GetPromptMsg();
+            gameManager.uiManager.showPromptText(promptMessage);
+        }
+        else
+        {
+            gameManager.uiManager.hidePromptText();
+        }
     }
 }
