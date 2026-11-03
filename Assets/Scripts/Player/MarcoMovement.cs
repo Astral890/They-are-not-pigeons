@@ -30,7 +30,8 @@ public class marcoMovement : MonoBehaviour
     private bool isGrounded;
     private float xRotation = 0.0f;
     private bool isUIOpen = false;
-
+    public bool canOpenInventory = true;
+    private bool isInventoryOpen = false;
     [SerializeField] private GameManager gameManager;
 
     private void OnEnable()
@@ -104,7 +105,8 @@ public class marcoMovement : MonoBehaviour
 
     private void OnInteract(InputAction.CallbackContext context)
     {
-        if(currentInteractable.GetType() != typeof(StoreManager) && isUIOpen) return;
+        if(isInventoryOpen) return;
+        Debug.Log(isUIOpen.ToString());
         currentInteractable?.Interact();
     }
 
@@ -123,9 +125,13 @@ public class marcoMovement : MonoBehaviour
 
     private void OnOpenInventory(InputAction.CallbackContext context)
     {
-        isUIOpen = !isUIOpen;
-        gameManager.uiManager.OpenInventory(isUIOpen);
-        LockCursor(isUIOpen);
+        if (canOpenInventory)
+        {
+            isUIOpen = !isUIOpen;
+            gameManager.uiManager.OpenInventory(isUIOpen);
+            LockCursor(isUIOpen);
+            isInventoryOpen = !isInventoryOpen;
+        }
     }
 
     public void SetCurrentInteractable(InteractableE interactable)
