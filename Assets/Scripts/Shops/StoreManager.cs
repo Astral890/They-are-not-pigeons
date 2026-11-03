@@ -30,6 +30,8 @@ public class StoreManager : MonoBehaviour, InteractableE
             isPlayerInside = false;
             playerRef.SetCurrentInteractable(null);
             playerRef.UpdatePromptUI();
+            if (isStoreOpen) playerRef.SetMenuState(false);
+            playerRef.canOpenInventory = true;
             playerRef = null;
             isStoreOpen = false;
             uiManager.SetStoreVisibility(isStoreOpen);
@@ -71,12 +73,14 @@ public class StoreManager : MonoBehaviour, InteractableE
             isStoreOpen = true;
             uiManager.SetStoreVisibility(isStoreOpen);
             playerRef.SetMenuState(isStoreOpen);
+            playerRef.canOpenInventory = false;
         }
         else
         {
             isStoreOpen = false;
             uiManager.SetStoreVisibility(isStoreOpen);
             playerRef.SetMenuState(isStoreOpen);
+            playerRef.canOpenInventory = true;
         }
     }
 
