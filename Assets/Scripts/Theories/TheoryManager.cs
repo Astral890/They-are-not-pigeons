@@ -5,8 +5,6 @@ using Unity.VisualScripting;
 
 public class TheoryManager : MonoBehaviour, InteractableE
 {
-    public static TheoryManager Instance;
-
     [SerializeField] private TheorySlot slot1;
     [SerializeField] private TheorySlot slot2;
     [SerializeField] private TheorySlot slot3;
@@ -29,29 +27,36 @@ public class TheoryManager : MonoBehaviour, InteractableE
         Debug.Log("Despues del populate");
     }
 
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
-
     public void ValidateTheory()
     {
+        //Debug.Log($"childCounts -> Slot1: {slot1.transform.childCount}, Slot2: {slot2.transform.childCount}, Slot3: {slot3.transform.childCount}");
+
+        /*Debug.Log("Validando teoría");
+        Debug.Log($"Slot 1: {slot1.currentConcept?.conceptId ?? "Vacío"}");
+        Debug.Log($"Slot 2: {slot2.currentConcept?.conceptId ?? "Vacío"}");
+        Debug.Log($"Slot 3: {slot3.currentConcept?.conceptId ?? "Vacío"}");*/
         // Verificar que los 3 slots tengan un concepto asignado
-        if (slot1.transform.childCount == 0 ||
-            slot2.transform.childCount == 0 ||
-            slot3.transform.childCount == 0)
+        if (slot1.currentConcept == null ||
+            slot2.currentConcept == null ||
+            slot3.currentConcept == null)
         {
             return;
         }
 
-        DraggableConcept c1 = slot1.GetComponentInChildren<DraggableConcept>();
-        DraggableConcept c2 = slot2.GetComponentInChildren<DraggableConcept>();
-        DraggableConcept c3 = slot3.GetComponentInChildren<DraggableConcept>();
+        Debug.Log("Todos los slots tienen conceptos asignados");
 
-        if (c1 != null && c2 != null && c3 != null)
+        /*DraggableConcept c1 = slot1.GetComponentInChildren<DraggableConcept>();
+        DraggableConcept c2 = slot2.GetComponentInChildren<DraggableConcept>();
+        DraggableConcept c3 = slot3.GetComponentInChildren<DraggableConcept>();*/
+
+        Debug.Log("Obteniendo conceptos");
+        if (slot1.currentConcept != null && slot2.currentConcept != null && slot3.currentConcept != null)
         {
-            CheckCombination(c1.conceptId, c2.conceptId, c3.conceptId);
+            CheckCombination(slot1.currentConcept.conceptId, slot2.currentConcept.conceptId, slot3.currentConcept.conceptId);
+        }
+        else
+        {
+            Debug.Log("Uno o más slots no tienen un concepto asignado.");
         }
     }
 

@@ -16,6 +16,7 @@ public class DraggableConcept : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private GameObject placeholder = null;
     [HideInInspector] public int slotIndex;
     [SerializeField] private TextMeshProUGUI descriptionText;
+    private bool isLocked = false;
 
 
     private void Awake()
@@ -36,6 +37,7 @@ public class DraggableConcept : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if(isLocked) return;
         parentToReturnTo = transform.parent;
 
         // Crear un placeholder vacío para mantener el espacio dentro del GridLayoutGroup
@@ -53,24 +55,27 @@ public class DraggableConcept : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
+        if(isLocked) return;
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if(isLocked) return;
         canvasGroup.blocksRaycasts = true;
 
         // Si se regresa al menú original, toma la posición del placeholder
         if (parentToReturnTo == placeholder.transform.parent)
         {
-            transform.SetParent(parent, false);
-            transform.SetSiblingIndex(slotIndex);
+            transform.SetParent(parentToReturnTo, false);
+            transform.SetSiblingIndex(placeholder.transform.GetSiblingIndex());
         }
         else
         {
             // Cayó en un TheorySlot
             transform.SetParent(parentToReturnTo, false);
             rectTransform.anchoredPosition = Vector2.zero;
+            isLocked = true; // Bloquear el concepto para que no pueda ser arrastrado nuevamente
         }
 
         Destroy(placeholder);
