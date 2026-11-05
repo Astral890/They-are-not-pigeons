@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxHunger = 100f;
     [SerializeField] private float hunger = 100f;
     [SerializeField] private float hungerDownMinute = 5f;
+    //[SerializeField] private string playerName = "Player";
+    [SerializeField] private string currentTheory = "None";
 
     public event Action<float> OnHungerChanged;
 
@@ -56,5 +58,11 @@ public class PlayerStats : MonoBehaviour
     {
         hunger = Mathf.Clamp(hunger + amount, 0f, maxHunger);
         OnHungerChanged?.Invoke(hunger);
+    }
+
+    public void SetCurrentTheory(string theory)
+    {
+        Debug.Log($"Teoría actualizada a: {theory}");
+        currentTheory = theory;
     }
 }

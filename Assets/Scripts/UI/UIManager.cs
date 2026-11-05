@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private marcoMovement player;
     [SerializeField] private GameObject InventoryPanel;
+    [SerializeField] private GameObject theoryPanel;
 
     public void showPromptText(string text)
     {
@@ -53,5 +54,10 @@ public class UIManager : MonoBehaviour
     public void OpenInventory(bool flag)
     {
         InventoryPanel.SetActive(flag);
+    }
+
+    public void SetTheoryVisibility(bool isVisible)
+    {
+        theoryPanel.SetActive(isVisible);
     }
 }

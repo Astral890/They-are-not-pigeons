@@ -11,7 +11,10 @@ public class TheoryManager : MonoBehaviour, InteractableE
     [SerializeField] private List<ConceptInfo> conceptsList;
     [SerializeField] private Transform conceptsContainer;
     [SerializeField] private GameObject conceptSlotPrefab;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private UIManager uiManager;
     private bool isPlayerInside = false;
+    private bool isTheoryOpen = false;
     private marcoMovement playerRef;
 
     private void OnTriggerEnter(Collider other)
@@ -25,6 +28,21 @@ public class TheoryManager : MonoBehaviour, InteractableE
         }
         populateConcepts(conceptsList);
         Debug.Log("Despues del populate");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInside = false;
+            playerRef.SetCurrentInteractable(null);
+            playerRef.UpdatePromptUI();
+            if (isTheoryOpen) playerRef.SetMenuState(false);
+            playerRef.canOpenInventory = true;
+            playerRef = null;
+            isTheoryOpen = false;
+            uiManager.SetTheoryVisibility(isTheoryOpen);
+        }
     }
 
     public void ValidateTheory()
@@ -43,24 +61,24 @@ public class TheoryManager : MonoBehaviour, InteractableE
             return;
         }
 
-        Debug.Log("Todos los slots tienen conceptos asignados");
+        //Debug.Log("Todos los slots tienen conceptos asignados");
 
         /*DraggableConcept c1 = slot1.GetComponentInChildren<DraggableConcept>();
         DraggableConcept c2 = slot2.GetComponentInChildren<DraggableConcept>();
         DraggableConcept c3 = slot3.GetComponentInChildren<DraggableConcept>();*/
 
-        Debug.Log("Obteniendo conceptos");
+        //Debug.Log("Obteniendo conceptos");
         if (slot1.currentConcept != null && slot2.currentConcept != null && slot3.currentConcept != null)
         {
-            CheckCombination(slot1.currentConcept.conceptId, slot2.currentConcept.conceptId, slot3.currentConcept.conceptId);
+            CheckCombination(slot1.currentConcept.conceptId, slot2.currentConcept.conceptId, slot3.currentConcept.conceptId, slot1.currentConcept.fullTheory);
         }
         else
         {
-            Debug.Log("Uno o más slots no tienen un concepto asignado.");
+            //Debug.Log("Uno o más slots no tienen un concepto asignado.");
         }
     }
 
-    private void CheckCombination(string id1, string id2, string id3)
+    private void CheckCombination(string id1, string id2, string id3, string correctTheory)
     {
         // Lógica de comprobación de tu juego
         Debug.Log($"Evaluando teoría: {id1} + {id2} + {id3}");
@@ -68,6 +86,12 @@ public class TheoryManager : MonoBehaviour, InteractableE
         if ((id1 == id2) && (id2==id3))
         {
             Debug.Log("¡Teoría correcta descubierta!");
+            gameManager.player.SetCurrentTheory(correctTheory);
+        }
+        else
+        {
+            Debug.Log("Teoría incorrecta");
+            gameManager.player.SetCurrentTheory("");
         }
     }
 
@@ -87,12 +111,25 @@ public class TheoryManager : MonoBehaviour, InteractableE
 
     public void Interact()
     {
-        Debug.Log("Interact");
+        Debug.Log("Interacting with the theory manager");
+        if(isPlayerInside && !isTheoryOpen)
+        {
+            isTheoryOpen = true;
+            uiManager.SetTheoryVisibility(isTheoryOpen);
+            playerRef.SetMenuState(isTheoryOpen);
+            playerRef.canOpenInventory = false;
+        }
+        else
+        {
+            isTheoryOpen = false;
+            uiManager.SetTheoryVisibility(isTheoryOpen);
+            playerRef.SetMenuState(isTheoryOpen);
+            playerRef.canOpenInventory = true;
+        }
     }
 
     public string GetPromptMsg()
     {
-        Debug.Log("Prompt");
-        return "1";
+        return "Presiona E para abrir el panel de teorías";
     }
 }
