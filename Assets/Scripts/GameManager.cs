@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public PlayerStats player;
     public PlayerInventory playerInventory;
     public UIManager uiManager;
+    [SerializeField] private SpawAudience spawAudience;
 
     private void Awake()
     {
@@ -21,5 +22,11 @@ public class GameManager : MonoBehaviour
     {
         player.RemoveMoney(amount);
         uiManager.updateMoney(player.GetMoney());
+    }
+
+    public void StartSpeech()
+    {
+        uiManager.SetNight();
+        spawAudience.StartSpawningAudience();
     }
 }

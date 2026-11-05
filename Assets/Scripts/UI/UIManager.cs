@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using System;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +11,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private marcoMovement player;
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] private GameObject theoryPanel;
+    [SerializeField] private GameObject directionalLight;
+    [SerializeField] private float transitionDuration = 10f;
+    private Vector3 dayRotation = new Vector3(50f, -30f, 0f);
+    private Vector3 nightRotation = new Vector3(-14.251f, -19.366f, 28.804f);
+                                                //-27.863, -21.318, 34.195
+    private Coroutine nightTransitionCoroutine;
 
     public void showPromptText(string text)
     {
@@ -59,5 +65,38 @@ public class UIManager : MonoBehaviour
     public void SetTheoryVisibility(bool isVisible)
     {
         theoryPanel.SetActive(isVisible);
+    }
+
+    public void SetNight()
+    {
+        if (nightTransitionCoroutine != null)
+        {
+            StopCoroutine(nightTransitionCoroutine);
+        }
+
+        nightTransitionCoroutine = StartCoroutine(TransitionToNightRoutine());
+    }
+
+    private IEnumerator TransitionToNightRoutine()
+    {
+        Transform lightTransform = directionalLight.transform;
+        Quaternion startRotation = lightTransform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(nightRotation);
+
+        float elapsed = 0f;
+
+        while (elapsed < transitionDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / transitionDuration);
+
+            // Interpolación esférica con suavizado al inicio y al final
+            lightTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, Mathf.SmoothStep(0f, 1f, t));
+
+            yield return null;
+        }
+
+        lightTransform.rotation = targetRotation;
+        nightTransitionCoroutine = null;
     }
 }
