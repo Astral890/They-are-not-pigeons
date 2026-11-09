@@ -54,6 +54,7 @@ public class StoreManager : MonoBehaviour, InteractableE
 
     public void TryBuyItem(ItemData item)
     {
+        
         if(gameManager.player.GetMoney() >= item.price)
         {
             gameManager.takeMoney(item.price);

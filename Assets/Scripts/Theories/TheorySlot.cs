@@ -6,33 +6,28 @@ public class TheorySlot : MonoBehaviour, IDropHandler
 {
     public DraggableConcept currentConcept { get; private set; }
     public int slotCount = 5;
+    [SerializeField] private TheoryManager theoryManager;
 
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null) return;
 
-        try
-        {
-            currentConcept.transform.SetParent(currentConcept.parent, false);
-            currentConcept.transform.SetSiblingIndex(currentConcept.slotIndex);
-            currentConcept = null;
-        }catch(Exception ex)
-        {
-            Debug.Log("Error: "+ex.ToString());
-        }
-
         DraggableConcept draggedConcept = eventData.pointerDrag.GetComponent<DraggableConcept>();
 
         if (draggedConcept != null)
         {
-            
+            if (transform.childCount > 0)
+            {
+                return;
+            }
 
             // Asignar el nuevo padre al slot
             draggedConcept.parentToReturnTo = transform;
             currentConcept = draggedConcept;
+            Debug.Log($"Concepto colocado");
 
             // Notificar al gestor de la teoría
-            TheoryManager.Instance?.ValidateTheory();
+            theoryManager.ValidateTheory();
         }
     }
 
