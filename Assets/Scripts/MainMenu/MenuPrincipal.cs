@@ -7,4 +7,13 @@ public class MenuPrincipal : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("Plaza");
     }
+
+    public void ExitGame()
+    {
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #else
+        UnityEngine.Application.Quit();
+    #endif
+    }
 }
