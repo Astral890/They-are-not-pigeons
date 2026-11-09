@@ -4,6 +4,8 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI followersText;
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private TextMeshProUGUI promptMsg;
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private HungerUI hungerUI;
@@ -14,8 +16,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject directionalLight;
     [SerializeField] private float transitionDuration = 10f;
     private Vector3 dayRotation = new Vector3(50f, -30f, 0f);
-    private Vector3 nightRotation = new Vector3(-14.251f, -19.366f, 28.804f);
-                                                //-27.863, -21.318, 34.195
+    private Vector3 nightRotation = new Vector3(-27.863f, -21.318f, 34.195f);
+                                                //nuevos -27.863, -21.318, 34.195
+                                                //viejos -14.251, -19.366, 28.804
     private Coroutine nightTransitionCoroutine;
 
     public void showPromptText(string text)
@@ -32,6 +35,11 @@ public class UIManager : MonoBehaviour
     public void updateMoney(int value)
     {
         money.text =value.ToString();
+    }
+
+    public void updateFollowers(int value)
+    {
+        followersText.text = "F: " + value.ToString();
     }
 
     public void BindPlayer(PlayerStats player)
@@ -98,5 +106,6 @@ public class UIManager : MonoBehaviour
 
         lightTransform.rotation = targetRotation;
         nightTransitionCoroutine = null;
+        gameManager.EndSpeech(); // Llamada a EndSpeech() después de la transición
     }
 }

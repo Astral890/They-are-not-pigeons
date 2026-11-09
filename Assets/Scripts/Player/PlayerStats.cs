@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxHunger = 100f;
     [SerializeField] private float hunger = 100f;
     [SerializeField] private float hungerDownMinute = 5f;
+    [SerializeField] private int followers = 0;
     //[SerializeField] private string playerName = "Player";
     [SerializeField] private string currentTheory = "None";
 
@@ -64,5 +65,15 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log($"Teoría actualizada a: {theory}");
         currentTheory = theory;
+    }
+
+    public void AddFollowers(int quantity)
+    {
+        followers+= quantity;
+    }
+
+    public int GetFollowers()
+    {
+        return followers;
     }
 }
