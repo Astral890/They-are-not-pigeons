@@ -5611,6 +5611,7 @@ GameObject:
   m_Component:
   - component: {fileID: 582381677}
   - component: {fileID: 582381676}
+  - component: {fileID: 582381678}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5630,11 +5631,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4650e45f2cc293708ab418a8d5973c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  baseFollowers: 1000
+  followersMultiplier: 3.5
+  baseMoney: 5
+  moneyMultiplier: 3.5
   player: {fileID: 1406870381}
   playerInventory: {fileID: 1406870382}
   uiManager: {fileID: 665540333}
   playerMovement: {fileID: 1406870378}
   spawAudience: {fileID: 129735520}
+  theoryValidator: {fileID: 582381678}
 --- !u!4 &582381677
 Transform:
   m_ObjectHideFlags: 0
@@ -5650,6 +5656,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &582381678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582381675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cf7bb1994c6fd5db3b8a2217051ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TheoryValidator
 --- !u!1001 &596839362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6486,6 +6504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37097ba33144ad737b4601ecc34f601b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  followersText: {fileID: 0}
   gameManager: {fileID: 582381676}
   promptMsg: {fileID: 1608455752}
   money: {fileID: 1325072640}
@@ -12114,6 +12133,7 @@ MonoBehaviour:
   maxHunger: 100
   hunger: 100
   hungerDownMinute: 0
+  followers: 1000
   currentTheory: None
 --- !u!114 &1406870382
 MonoBehaviour:

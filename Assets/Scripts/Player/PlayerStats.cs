@@ -67,9 +67,23 @@ public class PlayerStats : MonoBehaviour
         currentTheory = theory;
     }
 
+    public string GetCurrentTheory()
+    {
+        return currentTheory;
+    }
+
     public void AddFollowers(int quantity)
     {
         followers+= quantity;
+    }
+
+    public void RemoveFollowers(int quantity)
+    {
+        followers -= quantity;
+        if (followers < 0)
+        {
+            followers = 0;
+        }
     }
 
     public int GetFollowers()
