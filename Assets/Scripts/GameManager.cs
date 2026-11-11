@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int baseFollowers = 1000;
-    [SerializeField] private float followersMultiplier = 3.5f;
+    [SerializeField] private int baseFollowers = 3;
+    [SerializeField] private float followersScale = 0.8f;
     [SerializeField] private int baseMoney = 5;
     [SerializeField] private float moneyMultiplier = 3.5f;
     public PlayerStats player;
@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
     {
         player.AddMoney(amount);
         uiManager.updateMoney(player.GetMoney());
+    }
+
+    public void giveFollowers(int amount)
+    {
+        player.AddFollowers(amount);
+        uiManager.updateFollowers(player.GetFollowers());
     }
 
     public void takeMoney(int amount)
@@ -47,22 +53,29 @@ public class GameManager : MonoBehaviour
     public void GiveRewardsSpeech()
     {
         int moneyReward = CalculateMoneyReward();
+        //Debug.Log("Theory is correct: " + CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
+        int followersReward = CalculateFollowersReward(CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
         Debug.Log("Money Reward: " + moneyReward);
+        Debug.Log("Followers Reward: " + followersReward);
         giveMoney(moneyReward);
-        Debug.Log("Theory is correct: " + CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
-    }
-
-    private int CalculateFollowersReward()
-    {
-        
-        int totalFollowers = baseFollowers + player.GetFollowers();
-        return totalFollowers;
+        giveFollowers(followersReward);
     }
 
     private int CalculateMoneyReward()
     {
         float reward = baseMoney + (moneyMultiplier * Mathf.Sqrt(Mathf.Max(0, player.GetFollowers())));
         return Mathf.FloorToInt(reward);
+    }
+
+    private int CalculateFollowersReward(bool isTheoryCorrect)
+    {
+        int amount = 0;
+        if (isTheoryCorrect)
+        {
+            float followersCalc = baseFollowers + (followersScale * Mathf.Sqrt(Mathf.Max(0,player.GetFollowers())));
+            amount = Mathf.RoundToInt(followersCalc);
+        }
+        return amount;
     }
 
     private bool CheckIfTheoryIsCorrect(string theory)
