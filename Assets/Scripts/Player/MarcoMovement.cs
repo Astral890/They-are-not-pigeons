@@ -33,6 +33,7 @@ public class marcoMovement : MonoBehaviour
     public bool canOpenInventory = true;
     private bool isInventoryOpen = false;
     [SerializeField] private GameManager gameManager;
+    private bool canMove = true;
 
     private void OnEnable()
     {
@@ -78,6 +79,20 @@ public class marcoMovement : MonoBehaviour
         }
 
         // 2. GROUND MOVEMENT
+        /*if(canMove)
+        {
+            isGrounded = controller.isGrounded;
+            if (isGrounded && verticalVelocity.y < 0)
+                verticalVelocity.y = -2f;
+
+            float horizontalInput = (keyboard.dKey.isPressed ? 1f : 0f) - (keyboard.aKey.isPressed ? 1f : 0f);
+            float verticalInput = (keyboard.wKey.isPressed ? 1f : 0f) - (keyboard.sKey.isPressed ? 1f : 0f);
+
+            Vector3 direction = transform.right * horizontalInput + transform.forward * verticalInput;
+            direction = Vector3.ClampMagnitude(direction, 1f);
+            controller.Move(direction * moveSpeed * Time.deltaTime);
+        }*/
+
         isGrounded = controller.isGrounded;
         if (isGrounded && verticalVelocity.y < 0)
             verticalVelocity.y = -2f;
@@ -87,7 +102,7 @@ public class marcoMovement : MonoBehaviour
 
         Vector3 direction = transform.right * horizontalInput + transform.forward * verticalInput;
         direction = Vector3.ClampMagnitude(direction, 1f);
-        controller.Move(direction * moveSpeed * Time.deltaTime);
+        if(canMove) controller.Move(direction * moveSpeed * Time.deltaTime);
 
         // 3. JUMP AND GRAVITY
         if (keyboard.spaceKey.wasPressedThisFrame && isGrounded)
@@ -151,5 +166,13 @@ public class marcoMovement : MonoBehaviour
         {
             gameManager.uiManager.hidePromptText();
         }
+    }
+
+    public void SetTransitionState(bool state)
+    {
+        isUIOpen = state;
+        Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = !state;
+        canMove = !state;
     }
 }
