@@ -4,6 +4,7 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private GameObject sleepPanel;
     [SerializeField] private TextMeshProUGUI followersText;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private TextMeshProUGUI promptMsg;
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
                                                 //nuevos -27.863, -21.318, 34.195
                                                 //viejos -14.251, -19.366, 28.804
     private Coroutine nightTransitionCoroutine;
+    private Coroutine dayTransitionCorutine;
 
     public void showPromptText(string text)
     {
@@ -48,15 +50,15 @@ public class UIManager : MonoBehaviour
         hungerUI.UpdateBar(player.GetHunger());
     }
 
-    public void showStore()
+    public void ShowSleepPanel()
     {
-        shopPanel.SetActive(true);
+        sleepPanel.SetActive(true);
         player.SetMenuState(true);
     }
 
-    public void hideStore()
+    public void HideSleepPanel()
     {
-        shopPanel.SetActive(false);
+        sleepPanel.SetActive(false);
         player.SetMenuState(false);
     }
 
@@ -83,6 +85,38 @@ public class UIManager : MonoBehaviour
         }
 
         nightTransitionCoroutine = StartCoroutine(TransitionToNightRoutine());
+    }
+
+    public void SetDay()
+    {
+        if (dayTransitionCorutine != null)
+        {
+            StopCoroutine(dayTransitionCorutine);
+        }
+
+        dayTransitionCorutine = StartCoroutine(TransitionToDayRoutine());
+    }
+
+    private IEnumerator TransitionToDayRoutine()
+    {
+        Transform lightTransform = directionalLight.transform;
+        Quaternion startRotation = lightTransform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(dayRotation);
+
+        float elapsed = 0f;
+
+        while (elapsed < transitionDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / transitionDuration);
+
+            lightTransform.rotation = Quaternion.Slerp(startRotation, targetRotation, Mathf.SmoothStep(0f, 1f, t));
+
+            yield return null;
+        }
+
+        lightTransform.rotation = targetRotation;
+        dayTransitionCorutine = null;
     }
 
     private IEnumerator TransitionToNightRoutine()

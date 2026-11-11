@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerStats player;
     public PlayerInventory playerInventory;
     public UIManager uiManager;
+    public bool isNight = false;
     [SerializeField] private marcoMovement playerMovement;
     [SerializeField] private SpawAudience spawAudience;
     [SerializeField] private TheoryValidator theoryValidator;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     public void StartSpeech()
     {
         playerMovement.SetTransitionState(true);
+        isNight = true;
         uiManager.SetNight();
         spawAudience.StartSpawningAudience();
 
