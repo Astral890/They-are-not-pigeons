@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private marcoMovement playerMovement;
     [SerializeField] private SpawAudience spawAudience;
     [SerializeField] private TheoryValidator theoryValidator;
+    public int numDays = 1;
 
     private void Awake()
     {
@@ -83,5 +84,11 @@ public class GameManager : MonoBehaviour
     private bool CheckIfTheoryIsCorrect(string theory)
     {
         return theoryValidator.IsTheoryValid(theory);
+    }
+
+    public void NextDay()
+    {
+        numDays++;
+        isNight = false;
     }
 }
