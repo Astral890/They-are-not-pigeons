@@ -38,6 +38,11 @@ public class SleepManager : MonoBehaviour, InteractableE
         Debug.Log("Interacting with the store");
         if (isPlayerInside && !isSleepPanelOpen)
         {
+            if (!gameManager.isNight)
+            {
+                gameManager.uiManager.showPromptText("No puedes dormir durante el día");
+                return;
+            }
             isSleepPanelOpen = true;
             sleepUI.SetUpPanelSleep();
             gameManager.uiManager.ShowSleepPanel();
