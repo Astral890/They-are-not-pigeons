@@ -2501,6 +2501,59 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1803253995}
   m_SourcePrefab: {fileID: 100100000, guid: e9089b1db16b58f4282a94e020b9c0e8, type: 3}
+--- !u!1 &162243309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162243311}
+  - component: {fileID: 162243310}
+  m_Layer: 0
+  m_Name: HTTPHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &162243310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162243309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d3f32c47bd4f290b83f2d2b23723f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HTTPHandler
+  gameManager: {fileID: 0}
+  transactionInProgress: 0
+  datosUsuario:
+    idUsuario: 0
+    username: 
+    seguidores: 0
+    cohesion: 0
+    dinero: 0
+  listaVideos: []
+--- !u!4 &162243311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162243309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.28, y: -9.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &162322479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21602,6 +21655,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e6ad7e327a21af4eb05ad8b0d1a7117, type: 2}
   - {fileID: 11400000, guid: c8ea28148ec33e147b1c6edbd691b644, type: 2}
   - {fileID: 11400000, guid: 0c12425baf26da04bb9a60e909b00a0e, type: 2}
+  - {fileID: 11400000, guid: 7b63e90686836832bac09fb5907d03d2, type: 2}
+  - {fileID: 11400000, guid: 9380c15ff8e48e4dda475b39a6f32cf2, type: 2}
+  - {fileID: 11400000, guid: 59199f716354d8a51a15f5581703390f, type: 2}
+  - {fileID: 11400000, guid: 14cbd3f1fed06a46785df7c733c0d36d, type: 2}
+  - {fileID: 11400000, guid: e44929fb7c316f929a1e4f4b7eba6083, type: 2}
+  - {fileID: 11400000, guid: d59801013ef3e91cca7c7340d519de1d, type: 2}
   conceptsContainer: {fileID: 644333398}
   conceptSlotPrefab: {fileID: 4462480452742210700, guid: adfa8dda6e37c2d409a2c059cd179d02, type: 3}
   gameManager: {fileID: 582381676}
@@ -27919,3 +27978,4 @@ SceneRoots:
   - {fileID: 934121260}
   - {fileID: 1472256084}
   - {fileID: 411964667}
+  - {fileID: 162243311}

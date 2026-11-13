@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: T1_2
   m_EditorClassIdentifier: Assembly-CSharp::ConceptInfo
   idTheory: 1
-  description: en la fuente
-  theory: Las palomas de la fuente son robots
+  description: "C\xE1mara"
+  theory: "La paloma es un dron esp\xEDa "
+  videoUrl: 

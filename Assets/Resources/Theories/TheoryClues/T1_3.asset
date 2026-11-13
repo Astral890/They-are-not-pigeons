@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: T1_3
   m_EditorClassIdentifier: Assembly-CSharp::ConceptInfo
   idTheory: 1
-  description: robots del gobierno
-  theory: Las palomas de la fuente son robots
+  description: Espionaje
+  theory: "La paloma es un dron esp\xEDa "
+  videoUrl: 

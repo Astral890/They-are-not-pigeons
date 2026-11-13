@@ -38,7 +38,7 @@ public class HTTPHandler : MonoBehaviour
     private string videosJson = @"[
       {
         ""idVideo"": 1,
-        ""theory"": ""banana"",
+        ""theory"": ""La paloma es un dron espía "",
         ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/YlaPaloma.mp4""
       },
       {
@@ -48,7 +48,7 @@ public class HTTPHandler : MonoBehaviour
       },
       {
         ""idVideo"": 3,
-        ""theory"": ""potato"",
+        ""theory"": ""Los gatos, mugrosos gatos"",
         ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/LosGatosSaben.mp4""
       }
     ]";
