@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject sleepPanel;
     [SerializeField] private TextMeshProUGUI followersText;
+    [SerializeField] private TextMeshProUGUI dayText;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private TextMeshProUGUI promptMsg;
     [SerializeField] private TextMeshProUGUI money;
@@ -42,6 +43,11 @@ public class UIManager : MonoBehaviour
     public void updateFollowers(int value)
     {
         followersText.text = "F: " + value.ToString();
+    }
+
+    public void UpdateDayDisplay()
+    {
+        dayText.text = "Day: " + gameManager.numDays.ToString();
     }
 
     public void BindPlayer(PlayerStats player)
@@ -95,6 +101,9 @@ public class UIManager : MonoBehaviour
         }
 
         dayTransitionCorutine = StartCoroutine(TransitionToDayRoutine());
+        gameManager.NextDay();
+        UpdateDayDisplay();
+
     }
 
     private IEnumerator TransitionToDayRoutine()
