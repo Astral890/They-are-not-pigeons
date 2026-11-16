@@ -33,6 +33,13 @@ public class TheorySlot : MonoBehaviour, IDropHandler
 
     public void ClearSlot()
     {
+        if (currentConcept != null)
+        {
+            Destroy(currentConcept.gameObject);
+
+            // devolverlo al panel, no creo que sea lo mejor, pero aqui esta la idea de que se haria
+            // currentConcept.transform.SetParent(originalParent);
+        }
         currentConcept = null;
     }
 }

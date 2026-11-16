@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float followersScale = 0.8f;
     [SerializeField] private int baseMoney = 5;
     [SerializeField] private float moneyMultiplier = 3.5f;
+    [SerializeField] private TheorySlot slot1;
+    [SerializeField] private TheorySlot slot2;
+    [SerializeField] private TheorySlot slot3;
     public PlayerStats player;
     public PlayerInventory playerInventory;
     public UIManager uiManager;
@@ -13,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private marcoMovement playerMovement;
     [SerializeField] private SpawAudience spawAudience;
     [SerializeField] private TheoryValidator theoryValidator;
+    [SerializeField] private SpeechManager speechManager;
     public int numDays = 1;
     public int followersReward = 0;
 
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
     public void EndSpeech()
     {
         playerMovement.SetTransitionState(false);
+        speechManager.ResetStatus();
         GiveRewardsSpeech();
     }
 
@@ -91,5 +96,8 @@ public class GameManager : MonoBehaviour
     {
         numDays++;
         isNight = false;
+        slot1.ClearSlot();
+        slot2.ClearSlot();
+        slot3.ClearSlot();
     }
 }
