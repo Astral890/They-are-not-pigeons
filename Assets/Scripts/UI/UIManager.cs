@@ -42,12 +42,12 @@ public class UIManager : MonoBehaviour
 
     public void updateFollowers(int value)
     {
-        followersText.text = "F: " + value.ToString();
+        followersText.text = value.ToString();
     }
 
     public void UpdateDayDisplay()
     {
-        dayText.text = "Day: " + gameManager.numDays.ToString();
+        dayText.text = gameManager.numDays.ToString();
     }
 
     public void BindPlayer(PlayerStats player)

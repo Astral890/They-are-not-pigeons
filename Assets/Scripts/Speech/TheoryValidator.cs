@@ -7,7 +7,7 @@ public class TheoryValidator : MonoBehaviour
     // Usando strings con comparación insensible a mayúsculas
     private readonly HashSet<string> _correctTheoryIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
-        "Las palomas de la fuente son robots",
+        "La paloma es un dron espía",
     };
 
     public bool IsTheoryValid(string playerTheory)

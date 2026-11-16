@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SpawAudience spawAudience;
     [SerializeField] private TheoryValidator theoryValidator;
     public int numDays = 1;
+    public int followersReward = 0;
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         int moneyReward = CalculateMoneyReward();
         //Debug.Log("Theory is correct: " + CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
-        int followersReward = CalculateFollowersReward(CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
+        followersReward = CalculateFollowersReward(CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
         Debug.Log("Money Reward: " + moneyReward);
         Debug.Log("Followers Reward: " + followersReward);
         giveMoney(moneyReward);

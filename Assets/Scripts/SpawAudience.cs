@@ -4,37 +4,45 @@ using System.Collections.Generic;
 using System;
 
 [Serializable]
-public class PositionData
+public class SpawnTransformData
 {
     public float x;
     public float y;
     public float z;
 
+    // Ángulos de rotación en grados (Euler)
+    public float rx;
+    public float ry;
+    public float rz;
+
     public Vector3 ToVector3() => new Vector3(x, y, z);
+    public Quaternion ToQuaternion() => Quaternion.Euler(rx, ry, rz);
 }
 
 [Serializable]
-public class PositionListWrapper
+public class SpawnTransformListWrapper
 {
-    public List<PositionData> positions;
+    public List<SpawnTransformData> positions;
 }
 
 public class SpawAudience : MonoBehaviour
 {
     [SerializeField] private GameObject audiencePrefab;
+    public List<GameObject> audiencePrefabs;
     private Coroutine spawnAudienceCoroutine;
     [SerializeField] private float spawnInterval = 1f;
 
+    // Se agregaron rx, ry, rz (en grados) a cada objeto del JSON
     private string positionsJson = @"{
         ""positions"": [
-            { ""x"": -10.6, ""y"": 1.2, ""z"": -0.93 },
-            { ""x"": -11.69, ""y"": 1.0, ""z"": 1.88 },
-            { ""x"": -10.63, ""y"": 1.0, ""z"": -4.02 },
-            { ""x"": -10.22, ""y"": 1.0, ""z"": 3.99 },
-            { ""x"": -9.33, ""y"": 1.2, ""z"": 0.45 }
+            { ""x"": -10.47,  ""y"": 0.093, ""z"": 0.1020748, ""rx"": 0, ""ry"": -165.439,  ""rz"": 0 },
+            { ""x"": -12.823, ""y"": 0.112, ""z"": -1.433615,  ""rx"": 0, ""ry"": -168.501, ""rz"": 0 },
+            { ""x"": -11.822, ""y"": 0.151, ""z"": -2.185783, ""rx"": 0, ""ry"": -158.974,  ""rz"": 0 },
+            { ""x"": -10.24596, ""y"": 0.127, ""z"": -2.410222,  ""rx"": 0, ""ry"": -143.535, ""rz"": 0 },
+            { ""x"": -7.540265,  ""y"": 0.149, ""z"": -1.492139,  ""rx"": 0, ""ry"": -136.661,  ""rz"": 0 }
         ]
     }";
-    private List<PositionData> spawnPositions = new List<PositionData>();
+    private List<SpawnTransformData> spawnTransforms = new List<SpawnTransformData>();
 
     private void Awake()
     {
@@ -55,10 +63,10 @@ public class SpawAudience : MonoBehaviour
     {
         if (string.IsNullOrEmpty(positionsJson)) return;
 
-        PositionListWrapper data = JsonUtility.FromJson<PositionListWrapper>(positionsJson);
+        SpawnTransformListWrapper data = JsonUtility.FromJson<SpawnTransformListWrapper>(positionsJson);
         if (data != null && data.positions != null)
         {
-            spawnPositions = data.positions;
+            spawnTransforms = data.positions;
         }
     }
 
@@ -66,18 +74,17 @@ public class SpawAudience : MonoBehaviour
     {
         int currentIndex = 0;
 
-        while (currentIndex < 5)
+        while (currentIndex < spawnTransforms.Count && currentIndex < audiencePrefabs.Count)
         {
-            Vector3 spawnPosition = transform.position;
-                // Toma la posición secuencialmente del JSON
-            spawnPosition = spawnPositions[currentIndex].ToVector3();
-            currentIndex = currentIndex + 1;
+            Vector3 spawnPosition = spawnTransforms[currentIndex].ToVector3();
+            Quaternion spawnRotation = spawnTransforms[currentIndex].ToQuaternion();
 
-            Instantiate(audiencePrefab, spawnPosition, Quaternion.identity);
+            Instantiate(audiencePrefabs[currentIndex], spawnPosition, spawnRotation);
+
+            currentIndex++;
 
             yield return new WaitForSeconds(spawnInterval);
         }
-        spawnAudienceCoroutine = null; // Reset the coroutine reference when done
-        yield break;
+        spawnAudienceCoroutine = null;
     }
 }
