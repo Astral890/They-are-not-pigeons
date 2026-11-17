@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConceptInfo
   idTheory: 3
   description: Gatos
-  theory: Los gatos, mugrosos gatosLos gatos, mugrosos gatos
+  theory: Los gatos, mugrosos gatos
   videoUrl: 

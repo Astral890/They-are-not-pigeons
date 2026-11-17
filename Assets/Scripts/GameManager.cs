@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private marcoMovement playerMovement;
     [SerializeField] private SpawAudience spawAudience;
     [SerializeField] private TheoryValidator theoryValidator;
+    [SerializeField] private TheoryManager theoryManager;
     [SerializeField] private SpeechManager speechManager;
     public int numDays = 1;
     public int followersReward = 0;
@@ -99,5 +100,7 @@ public class GameManager : MonoBehaviour
         slot1.ClearSlot();
         slot2.ClearSlot();
         slot3.ClearSlot();
+        theoryManager.ResetTheory();
+        player.SetCurrentTheory("None");
     }
 }

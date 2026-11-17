@@ -140,4 +140,9 @@ public class TheoryManager : MonoBehaviour, InteractableE
     {
         return "Presiona E para abrir el panel de teorías";
     }
+
+    public void ResetTheory()
+    {
+        theoryText.text = "Theory in progress....";
+    }
 }
