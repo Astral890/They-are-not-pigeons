@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Text;
 using System.Collections;
@@ -9,7 +10,7 @@ public class HTTPHandler : MonoBehaviour
     [System.Serializable]
     public class DatosUsuario
     {
-        public int idUsuario = -1;
+        public int idUsuario;
         public string username;
         public int seguidores;
         public int cohesion;
@@ -67,7 +68,7 @@ public class HTTPHandler : MonoBehaviour
         //Debug.Log(listaVideos[0].idVIdeo);
     }
 
-    void Start()
+    /*void Start()
     {
         Debug.Log("1: "+datosUsuario.idUsuario);
         datosUsuario.idUsuario=15;
@@ -75,7 +76,7 @@ public class HTTPHandler : MonoBehaviour
         //UpdateUserData("Gonzalo",500,30,500);
         //UploadStats();
 
-    }
+    }*/
 
     public void UpdateUserData(string username, int seguidores, int cohesion, int dinero)
     {
@@ -85,17 +86,17 @@ public class HTTPHandler : MonoBehaviour
         datosUsuario.dinero = dinero;
     }
 
-    public void UploadUser()
+    public void UploadUser(Action onComplete = null)
     {
-        if(transactionInProgress) return;
-        StartCoroutine(CrearUsuario("http://10.1.124.62:8080/api/usuarios/acceso"));
+        if (transactionInProgress) return;
+        StartCoroutine(CrearUsuario("http://10.1.124.62:8080/api/usuarios/acceso", onComplete));
     }
 
-    private IEnumerator CrearUsuario(string url)
+    private IEnumerator CrearUsuario(string url, Action onComplete)
     {
         transactionInProgress = true;
         string json = JsonUtility.ToJson(datosUsuario);
-        using(UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -109,10 +110,11 @@ public class HTTPHandler : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                //Debug.Log(request.downloadHandler.text);
                 DatosUsuario responseDatos = JsonUtility.FromJson<DatosUsuario>(request.downloadHandler.text);
                 datosUsuario.idUsuario = responseDatos.idUsuario;
-                //Debug.Log("2: "+datosUsuario.idUsuario);
+                
+                // Se ejecuta una vez que idUsuario ya tiene valor y transactionInProgress es false
+                onComplete?.Invoke(); 
             }
             else
             {
@@ -123,7 +125,7 @@ public class HTTPHandler : MonoBehaviour
 
     public void UploadStats()
     {
-        if( transactionInProgress || datosUsuario.idUsuario == -1) return;
+        if( transactionInProgress || datosUsuario.idUsuario == 0) return;
         StartCoroutine(ActualizarEstadisticas("http://10.1.124.62:8080/api/usuarios/"));
     }
 

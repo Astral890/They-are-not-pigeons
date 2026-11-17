@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float hunger = 100f;
     [SerializeField] private float hungerDownMinute = 5f;
     [SerializeField] private int followers = 0;
+    public int cohesion = 50;
     [SerializeField] public string username = "Player";
     [SerializeField] private string currentTheory = "None";
 

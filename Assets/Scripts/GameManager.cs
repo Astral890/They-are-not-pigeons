@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SpeechManager speechManager;
     public int numDays = 1;
     public int followersReward = 0;
+    [SerializeField] private HTTPHandler httpHandler;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void giveMoney(int amount)
     {
+        Debug.Log("idHttp: " + httpHandler.datosUsuario.idUsuario.ToString());
         player.AddMoney(amount);
         uiManager.updateMoney(player.GetMoney());
     }
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
         playerMovement.SetTransitionState(false);
         speechManager.ResetStatus();
         GiveRewardsSpeech();
+        UploadUserInformation();
     }
 
     public void GiveRewardsSpeech()
@@ -102,5 +105,19 @@ public class GameManager : MonoBehaviour
         slot3.ClearSlot();
         theoryManager.ResetTheory();
         player.SetCurrentTheory("None");
+    }
+
+    private void UploadUserInformation()
+    {
+        httpHandler.UpdateUserData(player.username, player.GetFollowers(), player.cohesion, player.GetMoney());
+        if(httpHandler.datosUsuario.idUsuario == 0)
+        {
+            httpHandler.UploadUser(() => httpHandler.UploadStats());
+        }
+        httpHandler.UploadStats();
+        if(player.GetCurrentTheory() != "Weak theory")
+        {
+            httpHandler.AsingVideoToUser(player.GetCurrentTheory());
+        }
     }
 }
