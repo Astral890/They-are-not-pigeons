@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Un aparato que reproduce sonidos
   icon: {fileID: 749741752, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
   price: 550
+  itemType: Upgrade

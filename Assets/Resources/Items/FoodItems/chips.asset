@@ -17,3 +17,4 @@ MonoBehaviour:
   description: A bag of sliced potatoes
   icon: {fileID: 1545396321, guid: 75c27c602df7f3ec2901186767798ded, type: 3}
   price: 6
+  itemType: Food

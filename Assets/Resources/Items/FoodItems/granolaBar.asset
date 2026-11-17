@@ -17,3 +17,4 @@ MonoBehaviour:
   description: A bar made of granola and other cereals
   icon: {fileID: 378326691, guid: 75c27c602df7f3ec2901186767798ded, type: 3}
   price: 10
+  itemType: Food

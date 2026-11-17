@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Un sombrero hecho de aluminio
   icon: {fileID: -137275479, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
   price: 50
+  itemType: Upgrade

@@ -17,3 +17,4 @@ MonoBehaviour:
   description: "Es un palo con tres pies\t"
   icon: {fileID: 1781600967, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
   price: 150
+  itemType: Upgrade

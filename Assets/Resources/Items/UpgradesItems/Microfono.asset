@@ -17,3 +17,4 @@ MonoBehaviour:
   description: Un microfono normal
   icon: {fileID: 2071084935, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
   price: 200
+  itemType: Upgrade
