@@ -39,18 +39,43 @@ public class HTTPHandler : MonoBehaviour
     private string videosJson = @"[
       {
         ""idVideo"": 1,
-        ""theory"": ""La paloma es un dron espía "",
-        ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/YlaPaloma.mp4""
+        ""theory"": ""La fuente cambia según tus pensamientos"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/fuente.mp4""
       },
       {
         ""idVideo"": 2,
-        ""theory"": ""tomato"",
-        ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/LosTacos.mp4""
+        ""theory"": ""La fuente mantiene el equilibrio de la plaza"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/FuenteChiquita.mp4""
       },
       {
         ""idVideo"": 3,
+        ""theory"": ""La paloma es un dron espía"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/YlaPaloma.mp4""
+      },
+      {
+        ""idVideo"": 4,
+        ""theory"": ""Los puentes cambian de lugar durante la noche"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/ElPuenteSseMueve.mp4""
+      },
+      {
+        ""idVideo"": 5,
+        ""theory"": ""El WIFI se alimenta de las conversaciones"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/ElWaifi.mp4""
+      },
+      {
+        ""idVideo"": 6,
         ""theory"": ""Los gatos, mugrosos gatos"",
-        ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/LosGatosSaben.mp4""
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/LosGatosSaben.mp4""
+      },
+      {
+        ""idVideo"": 7,
+        ""theory"": ""Los puestos de comida sirven pa otra cosa"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/LosTacos.mp4""
+      },
+      {
+        ""idVideo"": 8,
+        ""theory"": ""Las alcantarillas respiran"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/Coladeras.mp4""
       }
     ]";
 
