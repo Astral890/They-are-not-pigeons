@@ -54,7 +54,17 @@ public class StoreTheories : MonoBehaviour, InteractableE
 
     public void TryBuyItem(ConceptInfo concept)
     {
-        
+        if(gameManager.player.GetMoney() >= concept.cost)
+        {
+            gameManager.takeMoney(concept.cost);
+            gameManager.player.conceptInfos.Add(concept);
+            shopConcepts.Remove(concept);
+            PopulateStore(shopConcepts);
+        }
+        else
+        {
+            Debug.Log("No hay dineros para el concepto");
+        }
     }
 
     public void Interact()
@@ -63,14 +73,14 @@ public class StoreTheories : MonoBehaviour, InteractableE
         if (isPlayerInside && !isStoreOpen)
         {
             isStoreOpen = true;
-            uiManager.SetStoreVisibility(isStoreOpen);
+            uiManager.SetStoreThoeriesVisibility(isStoreOpen);
             playerRef.SetMenuState(isStoreOpen);
             playerRef.canOpenInventory = false;
         }
         else
         {
             isStoreOpen = false;
-            uiManager.SetStoreVisibility(isStoreOpen);
+            uiManager.SetStoreThoeriesVisibility(isStoreOpen);
             playerRef.SetMenuState(isStoreOpen);
             playerRef.canOpenInventory = true;
         }

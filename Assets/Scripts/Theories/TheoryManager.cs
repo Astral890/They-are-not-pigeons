@@ -19,11 +19,6 @@ public class TheoryManager : MonoBehaviour, InteractableE
     private bool isTheoryOpen = false;
     private marcoMovement playerRef;
 
-    private void Start()
-    {
-        populateConcepts(conceptsList);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -33,7 +28,7 @@ public class TheoryManager : MonoBehaviour, InteractableE
             playerRef.SetCurrentInteractable(this);
             playerRef.UpdatePromptUI();
         }
-        Debug.Log("Despues del populate");
+        populateConcepts(gameManager.player.conceptInfos);
     }
 
     private void OnTriggerExit(Collider other)
@@ -110,7 +105,7 @@ public class TheoryManager : MonoBehaviour, InteractableE
             Destroy(child.gameObject);
         }
 
-        foreach(var item in conceptsList)
+        foreach(var item in concepts)
         {
             GameObject slot = Instantiate(conceptSlotPrefab, conceptsContainer);
             slot.GetComponent<DraggableConcept>().SetUp(item);
