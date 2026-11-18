@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 1
+  m_CurrentQuality: 3
   m_QualitySettings:
   - serializedVersion: 5
     name: Mobile
@@ -157,7 +157,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: 015b8a42b1c48fd4a9f9a7efe31252d1, type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -212,7 +212,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 4b83569d67af61e458304325a23e5dfd, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: a7c7da6e717de9e4584c2bf2b9dcffc1, type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -237,7 +237,7 @@ QualitySettings:
     PS5: 1
     Server: 0
     Stadia: 0
-    Standalone: 2
+    Standalone: 1
     WebGL: 0
     Windows Store Apps: 0
     XboxOne: 0
