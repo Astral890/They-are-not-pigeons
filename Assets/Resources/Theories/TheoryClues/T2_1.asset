@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: T2_1
   m_EditorClassIdentifier: Assembly-CSharp::ConceptInfo
   idTheory: 2
-  description: Tacos
-  theory: Los puestos de comida sirven pa otra cosa
-  videoUrl: 
+  description: Temblores
+  theory: La fuente mantiene el equilibrio de la plaza
+  cost: 0

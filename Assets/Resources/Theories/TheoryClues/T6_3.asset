@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d48ade14d1748824cb6fe69f12e9fb0a, type: 3}
   m_Name: T6_3
   m_EditorClassIdentifier: Assembly-CSharp::ConceptInfo
-  idTheory: 
-  description: 
-  theory: 
+  idTheory: 6
+  description: Verdad
+  theory: Los gatos, mugrosos gatos
   cost: 0
