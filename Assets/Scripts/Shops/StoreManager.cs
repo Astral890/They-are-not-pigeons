@@ -58,7 +58,15 @@ public class StoreManager : MonoBehaviour, InteractableE
         if(gameManager.player.GetMoney() >= item.price)
         {
             gameManager.takeMoney(item.price);
-            gameManager.playerInventory.AddItem(item);
+            if(item.itemType == "Food")
+            {
+                gameManager.playerInventory.AddItem(item);
+            }
+            else
+            {
+                gameManager.moneyMultiplier += 0.5f;
+                gameManager.followersScale += 0.5f;
+            }
         }
         else
         {

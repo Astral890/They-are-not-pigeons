@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using static PlayerStats;
+using System.Collections.Generic;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,8 +9,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float hunger = 100f;
     [SerializeField] private float hungerDownMinute = 5f;
     [SerializeField] private int followers = 0;
-    //[SerializeField] private string playerName = "Player";
+    public int cohesion = 50;
+    [SerializeField] public string username = "Player";
     [SerializeField] private string currentTheory = "None";
+    [SerializeField] private List<ConceptInfo> conceptInfos; 
 
     public event Action<float> OnHungerChanged;
 

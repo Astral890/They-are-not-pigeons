@@ -49,5 +49,10 @@ public class SpeechManager : MonoBehaviour, InteractableE
         return "Presiona E para empezar con el discurso";
     }
 
+    public void ResetStatus()
+    {
+        isSpeechActive = false;
+    }
+
     
 }

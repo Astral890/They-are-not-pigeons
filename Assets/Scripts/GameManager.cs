@@ -3,9 +3,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private int baseFollowers = 3;
-    [SerializeField] private float followersScale = 0.8f;
+    [SerializeField] public float followersScale = 0.8f;
     [SerializeField] private int baseMoney = 5;
-    [SerializeField] private float moneyMultiplier = 3.5f;
+    [SerializeField] public float moneyMultiplier = 3.5f;
+    [SerializeField] private TheorySlot slot1;
+    [SerializeField] private TheorySlot slot2;
+    [SerializeField] private TheorySlot slot3;
     public PlayerStats player;
     public PlayerInventory playerInventory;
     public UIManager uiManager;
@@ -13,7 +16,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private marcoMovement playerMovement;
     [SerializeField] private SpawAudience spawAudience;
     [SerializeField] private TheoryValidator theoryValidator;
+    [SerializeField] private TheoryManager theoryManager;
+    [SerializeField] private SpeechManager speechManager;
     public int numDays = 1;
+    public int followersReward = 0;
+    [SerializeField] private HTTPHandler httpHandler;
 
     private void Awake()
     {
@@ -22,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void giveMoney(int amount)
     {
+        Debug.Log("idHttp: " + httpHandler.datosUsuario.idUsuario.ToString());
         player.AddMoney(amount);
         uiManager.updateMoney(player.GetMoney());
     }
@@ -50,14 +58,16 @@ public class GameManager : MonoBehaviour
     public void EndSpeech()
     {
         playerMovement.SetTransitionState(false);
+        speechManager.ResetStatus();
         GiveRewardsSpeech();
+        UploadUserInformation();
     }
 
     public void GiveRewardsSpeech()
     {
         int moneyReward = CalculateMoneyReward();
         //Debug.Log("Theory is correct: " + CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
-        int followersReward = CalculateFollowersReward(CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
+        followersReward = CalculateFollowersReward(CheckIfTheoryIsCorrect(player.GetCurrentTheory()));
         Debug.Log("Money Reward: " + moneyReward);
         Debug.Log("Followers Reward: " + followersReward);
         giveMoney(moneyReward);
@@ -90,5 +100,24 @@ public class GameManager : MonoBehaviour
     {
         numDays++;
         isNight = false;
+        slot1.ClearSlot();
+        slot2.ClearSlot();
+        slot3.ClearSlot();
+        theoryManager.ResetTheory();
+        player.SetCurrentTheory("None");
+    }
+
+    private void UploadUserInformation()
+    {
+        httpHandler.UpdateUserData(player.username, player.GetFollowers(), player.cohesion, player.GetMoney());
+        if(httpHandler.datosUsuario.idUsuario == 0)
+        {
+            httpHandler.UploadUser(() => httpHandler.UploadStats());
+        }
+        httpHandler.UploadStats();
+        if(player.GetCurrentTheory() != "Weak theory")
+        {
+            httpHandler.AsingVideoToUser(player.GetCurrentTheory());
+        }
     }
 }

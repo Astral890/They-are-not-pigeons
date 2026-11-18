@@ -8,4 +8,5 @@ public class ItemData : ScriptableObject
     [TextArea] public string description;
     public Sprite icon;
     public int price;
+    public string itemType = "";
 }

@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private marcoMovement player;
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] private GameObject theoryPanel;
+    [SerializeField] private GameObject inputUsernamePanel;
     [SerializeField] private GameObject directionalLight;
     [SerializeField] private float transitionDuration = 10f;
     private Vector3 dayRotation = new Vector3(50f, -30f, 0f);
@@ -35,6 +36,11 @@ public class UIManager : MonoBehaviour
         promptMsg.gameObject.SetActive(false);
     }
 
+    public void SetInputUsernamePanelVisibility(bool flag)
+    {
+        inputUsernamePanel.SetActive(flag);
+    }
+
     public void updateMoney(int value)
     {
         money.text =value.ToString();
@@ -42,12 +48,12 @@ public class UIManager : MonoBehaviour
 
     public void updateFollowers(int value)
     {
-        followersText.text = "F: " + value.ToString();
+        followersText.text = value.ToString();
     }
 
     public void UpdateDayDisplay()
     {
-        dayText.text = "Day: " + gameManager.numDays.ToString();
+        dayText.text = gameManager.numDays.ToString();
     }
 
     public void BindPlayer(PlayerStats player)

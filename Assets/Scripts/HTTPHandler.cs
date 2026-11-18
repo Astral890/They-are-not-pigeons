@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Text;
 using System.Collections;
@@ -9,7 +10,7 @@ public class HTTPHandler : MonoBehaviour
     [System.Serializable]
     public class DatosUsuario
     {
-        public int idUsuario = -1;
+        public int idUsuario;
         public string username;
         public int seguidores;
         public int cohesion;
@@ -38,18 +39,43 @@ public class HTTPHandler : MonoBehaviour
     private string videosJson = @"[
       {
         ""idVideo"": 1,
-        ""theory"": ""La paloma es un dron espía "",
-        ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/YlaPaloma.mp4""
+        ""theory"": ""La fuente cambia según tus pensamientos"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/fuente.mp4""
       },
       {
         ""idVideo"": 2,
-        ""theory"": ""tomato"",
-        ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/LosTacos.mp4""
+        ""theory"": ""La fuente mantiene el equilibrio de la plaza"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/FuenteChiquita.mp4""
       },
       {
         ""idVideo"": 3,
+        ""theory"": ""La paloma es un dron espía"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/YlaPaloma.mp4""
+      },
+      {
+        ""idVideo"": 4,
+        ""theory"": ""Los puentes cambian de lugar durante la noche"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/ElPuenteSseMueve.mp4""
+      },
+      {
+        ""idVideo"": 5,
+        ""theory"": ""El WIFI se alimenta de las conversaciones"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/ElWaifi.mp4""
+      },
+      {
+        ""idVideo"": 6,
         ""theory"": ""Los gatos, mugrosos gatos"",
-        ""video_url"": ""https://cdn.jsdelivr.net/gh/valeriacastillolopez/VideosLoquito@main/LosGatosSaben.mp4""
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/LosGatosSaben.mp4""
+      },
+      {
+        ""idVideo"": 7,
+        ""theory"": ""Los puestos de comida sirven pa otra cosa"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/LosTacos.mp4""
+      },
+      {
+        ""idVideo"": 8,
+        ""theory"": ""Las alcantarillas respiran"",
+        ""video_url"": ""https://raw.githubusercontent.com/valeriacastillolopez/loquito_app/main/Coladeras.mp4""
       }
     ]";
 
@@ -67,7 +93,7 @@ public class HTTPHandler : MonoBehaviour
         //Debug.Log(listaVideos[0].idVIdeo);
     }
 
-    void Start()
+    /*void Start()
     {
         Debug.Log("1: "+datosUsuario.idUsuario);
         datosUsuario.idUsuario=15;
@@ -75,7 +101,7 @@ public class HTTPHandler : MonoBehaviour
         //UpdateUserData("Gonzalo",500,30,500);
         //UploadStats();
 
-    }
+    }*/
 
     public void UpdateUserData(string username, int seguidores, int cohesion, int dinero)
     {
@@ -85,17 +111,17 @@ public class HTTPHandler : MonoBehaviour
         datosUsuario.dinero = dinero;
     }
 
-    public void UploadUser()
+    public void UploadUser(Action onComplete = null)
     {
-        if(transactionInProgress) return;
-        StartCoroutine(CrearUsuario("http://10.1.124.62:8080/api/usuarios/acceso"));
+        if (transactionInProgress) return;
+        StartCoroutine(CrearUsuario("http://10.1.124.62:8080/api/usuarios/acceso", onComplete));
     }
 
-    private IEnumerator CrearUsuario(string url)
+    private IEnumerator CrearUsuario(string url, Action onComplete)
     {
         transactionInProgress = true;
         string json = JsonUtility.ToJson(datosUsuario);
-        using(UnityWebRequest request = new UnityWebRequest(url, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -109,10 +135,11 @@ public class HTTPHandler : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                //Debug.Log(request.downloadHandler.text);
                 DatosUsuario responseDatos = JsonUtility.FromJson<DatosUsuario>(request.downloadHandler.text);
                 datosUsuario.idUsuario = responseDatos.idUsuario;
-                //Debug.Log("2: "+datosUsuario.idUsuario);
+                
+                // Se ejecuta una vez que idUsuario ya tiene valor y transactionInProgress es false
+                onComplete?.Invoke(); 
             }
             else
             {
@@ -123,7 +150,7 @@ public class HTTPHandler : MonoBehaviour
 
     public void UploadStats()
     {
-        if( transactionInProgress || datosUsuario.idUsuario == -1) return;
+        if( transactionInProgress || datosUsuario.idUsuario == 0) return;
         StartCoroutine(ActualizarEstadisticas("http://10.1.124.62:8080/api/usuarios/"));
     }
 

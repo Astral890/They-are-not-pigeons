@@ -2,12 +2,14 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using TMPro;
 
 public class TheoryManager : MonoBehaviour, InteractableE
 {
     [SerializeField] private TheorySlot slot1;
     [SerializeField] private TheorySlot slot2;
     [SerializeField] private TheorySlot slot3;
+    [SerializeField] private TextMeshProUGUI theoryText;
     [SerializeField] private List<ConceptInfo> conceptsList;
     [SerializeField] private Transform conceptsContainer;
     [SerializeField] private GameObject conceptSlotPrefab;
@@ -16,6 +18,11 @@ public class TheoryManager : MonoBehaviour, InteractableE
     private bool isPlayerInside = false;
     private bool isTheoryOpen = false;
     private marcoMovement playerRef;
+
+    private void Start()
+    {
+        populateConcepts(conceptsList);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,7 +33,6 @@ public class TheoryManager : MonoBehaviour, InteractableE
             playerRef.SetCurrentInteractable(this);
             playerRef.UpdatePromptUI();
         }
-        populateConcepts(conceptsList);
         Debug.Log("Despues del populate");
     }
 
@@ -87,11 +93,13 @@ public class TheoryManager : MonoBehaviour, InteractableE
         {
             Debug.Log("¡Teoría correcta descubierta!");
             gameManager.player.SetCurrentTheory(correctTheory);
+            theoryText.text = correctTheory;
         }
         else
         {
             Debug.Log("Teoría incorrecta");
-            gameManager.player.SetCurrentTheory("");
+            gameManager.player.SetCurrentTheory("Weak theory");
+            theoryText.text = "Weak theory";
         }
     }
 
@@ -131,5 +139,10 @@ public class TheoryManager : MonoBehaviour, InteractableE
     public string GetPromptMsg()
     {
         return "Presiona E para abrir el panel de teorías";
+    }
+
+    public void ResetTheory()
+    {
+        theoryText.text = "Theory in progress....";
     }
 }

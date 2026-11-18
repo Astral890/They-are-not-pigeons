@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConceptInfo
   idTheory: 1
   description: Espionaje
-  theory: "La paloma es un dron esp\xEDa "
+  theory: "La paloma es un dron esp\xEDa"
   videoUrl: 
