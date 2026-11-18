@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: T3_3
   m_EditorClassIdentifier: Assembly-CSharp::ConceptInfo
   idTheory: 3
-  description: Verdad
-  theory: Los gatos, mugrosos gatos
-  videoUrl: 
+  description: Espionaje
+  theory: "La paloma es un dron esp\xEDa"
+  cost: 0
