@@ -2932,7 +2932,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -41, y: 350}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &137973133
 MonoBehaviour:
@@ -7187,6 +7187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TheorySlot
   slotCount: 5
   theoryManager: {fileID: 1568579238}
+  gameManager: {fileID: 582381676}
 --- !u!114 &342941705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8279,6 +8280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TheorySlot
   slotCount: 5
   theoryManager: {fileID: 1568579238}
+  gameManager: {fileID: 582381676}
 --- !u!114 &400340204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14255,6 +14257,7 @@ MonoBehaviour:
   player: {fileID: 1406870378}
   InventoryPanel: {fileID: 1065587728}
   theoryPanel: {fileID: 2130338623}
+  storeTheoriesPanel: {fileID: 1380309453}
   inputUsernamePanel: {fileID: 679185759}
   directionalLight: {fileID: 410087039}
   transitionDuration: 10
@@ -14872,7 +14875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &679185760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17008,6 +17011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TheorySlot
   slotCount: 5
   theoryManager: {fileID: 1568579238}
+  gameManager: {fileID: 582381676}
 --- !u!114 &820736116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24198,7 +24202,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1316650305
 MonoBehaviour:
@@ -27892,9 +27896,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7b63e90686836832bac09fb5907d03d2, type: 2}
   - {fileID: 11400000, guid: 9380c15ff8e48e4dda475b39a6f32cf2, type: 2}
   - {fileID: 11400000, guid: 59199f716354d8a51a15f5581703390f, type: 2}
-  - {fileID: 11400000, guid: 14cbd3f1fed06a46785df7c733c0d36d, type: 2}
-  - {fileID: 11400000, guid: e44929fb7c316f929a1e4f4b7eba6083, type: 2}
-  - {fileID: 11400000, guid: d59801013ef3e91cca7c7340d519de1d, type: 2}
   conceptsContainer: {fileID: 644333398}
   conceptSlotPrefab: {fileID: 4462480452742210700, guid: adfa8dda6e37c2d409a2c059cd179d02, type: 3}
   gameManager: {fileID: 582381676}

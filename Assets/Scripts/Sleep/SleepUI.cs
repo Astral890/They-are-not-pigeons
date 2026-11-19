@@ -22,7 +22,7 @@ public class SleepUI : MonoBehaviour
 
     private void changeFollowersQty(int amount)
     {
-        Debug.Log(amount.ToString());
+        //Debug.Log(amount.ToString());
         if(amount >= 0)
         {
             followersGain.text = "+ " + amount.ToString();

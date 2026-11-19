@@ -7,6 +7,7 @@ public class TheorySlot : MonoBehaviour, IDropHandler
     public DraggableConcept currentConcept { get; private set; }
     public int slotCount = 5;
     [SerializeField] private TheoryManager theoryManager;
+    [SerializeField] private GameManager gameManager;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -24,7 +25,9 @@ public class TheorySlot : MonoBehaviour, IDropHandler
             // Asignar el nuevo padre al slot
             draggedConcept.parentToReturnTo = transform;
             currentConcept = draggedConcept;
+            gameManager.RemoveConceptFromUser(currentConcept.descriptionText.text);
             Debug.Log($"Concepto colocado");
+
 
             // Notificar al gestor de la teoría
             theoryManager.ValidateTheory();

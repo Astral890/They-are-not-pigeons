@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -110,14 +111,29 @@ public class GameManager : MonoBehaviour
     private void UploadUserInformation()
     {
         httpHandler.UpdateUserData(player.username, player.GetFollowers(), player.cohesion, player.GetMoney());
-        if(httpHandler.datosUsuario.idUsuario == 0)
+        Action alTerminarStats = () =>
         {
-            httpHandler.UploadUser(() => httpHandler.UploadStats());
-        }
-        httpHandler.UploadStats();
-        if(player.GetCurrentTheory() != "Weak theory")
+            if (player.GetCurrentTheory() != "Weak theory")
+            {
+                Debug.Log("Entro en asignar video");
+                httpHandler.AsingVideoToUser(player.GetCurrentTheory());
+            }
+        };
+
+        if (httpHandler.datosUsuario.idUsuario == 0)
         {
-            httpHandler.AsingVideoToUser(player.GetCurrentTheory());
+            httpHandler.UploadUser(() => httpHandler.UploadStats(alTerminarStats));
         }
+        else
+        {
+            httpHandler.UploadStats(alTerminarStats);
+        }
+    }
+
+    public void RemoveConceptFromUser(string descriptionText)
+    {
+        ConceptInfo conceptDelete = player.conceptInfos.Find(c => c.description == descriptionText);
+        Debug.Log("Concepto a borrar: " + conceptDelete.description);
+        player.conceptInfos.Remove(conceptDelete);
     }
 }

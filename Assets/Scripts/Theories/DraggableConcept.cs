@@ -15,7 +15,7 @@ public class DraggableConcept : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     private CanvasGroup canvasGroup;
     private GameObject placeholder = null;
     [HideInInspector] public int slotIndex;
-    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] public TextMeshProUGUI descriptionText;
     private bool isLocked = false;
 
 

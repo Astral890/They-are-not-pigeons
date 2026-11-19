@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private marcoMovement player;
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] private GameObject theoryPanel;
+    [SerializeField] private GameObject storeTheoriesPanel;
     [SerializeField] private GameObject inputUsernamePanel;
     [SerializeField] private GameObject directionalLight;
     [SerializeField] private float transitionDuration = 10f;
@@ -39,6 +40,11 @@ public class UIManager : MonoBehaviour
     public void SetInputUsernamePanelVisibility(bool flag)
     {
         inputUsernamePanel.SetActive(flag);
+    }
+
+    public void SetStoreThoeriesVisibility(bool flag)
+    {
+        storeTheoriesPanel.SetActive(flag);
     }
 
     public void updateMoney(int value)
