@@ -114,7 +114,7 @@ public class HTTPHandler : MonoBehaviour
     public void UploadUser(Action onComplete = null)
     {
         if (transactionInProgress) return;
-        StartCoroutine(CrearUsuario("http://10.1.124.62:8080/api/usuarios/acceso", onComplete));
+        StartCoroutine(CrearUsuario("http://10.1.124.97:8080/api/usuarios/acceso", onComplete));
     }
 
     private IEnumerator CrearUsuario(string url, Action onComplete)
@@ -148,22 +148,22 @@ public class HTTPHandler : MonoBehaviour
         }
     }
 
-    public void UploadStats()
+    public void UploadStats(Action onComplete = null)
     {
-        if( transactionInProgress || datosUsuario.idUsuario == 0) return;
-        StartCoroutine(ActualizarEstadisticas("http://10.1.124.62:8080/api/usuarios/"));
+        if (transactionInProgress || datosUsuario.idUsuario == 0) return;
+        StartCoroutine(ActualizarEstadisticas("http://10.1.124.97:8080/api/usuarios/", onComplete));
     }
 
-    private IEnumerator ActualizarEstadisticas(string url)
+    private IEnumerator ActualizarEstadisticas(string url, Action onComplete)
     {
         transactionInProgress = true;
         string json = JsonUtility.ToJson(datosUsuario);
-        using(UnityWebRequest request = new UnityWebRequest(url+datosUsuario.idUsuario+"/estadisticas", "PUT"))
+        using (UnityWebRequest request = new UnityWebRequest(url + datosUsuario.idUsuario + "/estadisticas", "PUT"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
-            
+
             request.SetRequestHeader("Content-Type", "application/json");
 
             yield return request.SendWebRequest();
@@ -173,11 +173,11 @@ public class HTTPHandler : MonoBehaviour
             if (request.result == UnityWebRequest.Result.Success)
             {
                 Debug.Log(request.downloadHandler.text);
-                //Debug.Log("2: "+datosUsuario.idUsuario);
+                onComplete?.Invoke();
             }
             else
             {
-                Debug.LogError("Error en POST: " + request.error);
+                Debug.LogError("Error en PUT: " + request.error);
             }
         }
     }
@@ -185,11 +185,13 @@ public class HTTPHandler : MonoBehaviour
     public void AsingVideoToUser(string theory)
     {
         if( transactionInProgress || datosUsuario.idUsuario == -1) return;
-        StartCoroutine(AsignarVideoAJugador("http://10.1.124.62:8080/api/usuarios/",theory));
+        StartCoroutine(AsignarVideoAJugador("http://10.1.124.97:8080/api/usuarios/",theory));
     }
 
     private IEnumerator AsignarVideoAJugador(string url, string theory)
     {
+        transactionInProgress = true;
+        Debug.Log("Id del user asignar: "+ datosUsuario.idUsuario);
         int idVideo=GetIdVideoByTheory(theory);
         if(idVideo == -1) yield break;
         using(UnityWebRequest request = new UnityWebRequest(url+datosUsuario.idUsuario+"/videos/"+idVideo, "POST"))

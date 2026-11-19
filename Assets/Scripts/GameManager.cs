@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -110,14 +111,22 @@ public class GameManager : MonoBehaviour
     private void UploadUserInformation()
     {
         httpHandler.UpdateUserData(player.username, player.GetFollowers(), player.cohesion, player.GetMoney());
-        if(httpHandler.datosUsuario.idUsuario == 0)
+        Action alTerminarStats = () =>
         {
-            httpHandler.UploadUser(() => httpHandler.UploadStats());
+            if (player.GetCurrentTheory() != "Weak theory")
+            {
+                Debug.Log("Entro en asignar video");
+                httpHandler.AsingVideoToUser(player.GetCurrentTheory());
+            }
+        };
+
+        if (httpHandler.datosUsuario.idUsuario == 0)
+        {
+            httpHandler.UploadUser(() => httpHandler.UploadStats(alTerminarStats));
         }
-        httpHandler.UploadStats();
-        if(player.GetCurrentTheory() != "Weak theory")
+        else
         {
-            httpHandler.AsingVideoToUser(player.GetCurrentTheory());
+            httpHandler.UploadStats(alTerminarStats);
         }
     }
 
