@@ -34,7 +34,7 @@ public class StoreTheories : MonoBehaviour, InteractableE
             playerRef.canOpenInventory = true;
             playerRef = null;
             isStoreOpen = false;
-            uiManager.SetStoreVisibility(isStoreOpen);
+            uiManager.SetStoreThoeriesVisibility(isStoreOpen);
         }
     }
 

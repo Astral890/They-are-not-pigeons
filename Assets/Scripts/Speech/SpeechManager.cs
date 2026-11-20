@@ -41,7 +41,6 @@ public class SpeechManager : MonoBehaviour, InteractableE
         {
             isSpeechActive = true;
             gameManager.StartSpeech();
-            uiManager.showPromptText("Discurso iniciado");
         }
     }
     public string GetPromptMsg()

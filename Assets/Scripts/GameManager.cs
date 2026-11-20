@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void StartSpeech()
     {
+        playerMovement.SetCamaraOnAudience();
         playerMovement.SetTransitionState(true);
         isNight = true;
         uiManager.SetNight();
