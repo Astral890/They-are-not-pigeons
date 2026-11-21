@@ -56,6 +56,8 @@ public sealed class PlazaPauseMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        ShowPauseHome();
         pausePanel.SetActive(true);
     }
 
