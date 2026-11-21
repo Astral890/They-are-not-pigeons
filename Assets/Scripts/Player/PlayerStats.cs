@@ -28,6 +28,11 @@ public class PlayerStats : MonoBehaviour
         currentMoney += amount;
     }
 
+    public void SetMoney(int amount)
+    {
+        currentMoney = amount;
+    }
+
     public int GetMoney()
     {
         return currentMoney;
@@ -40,6 +45,11 @@ public class PlayerStats : MonoBehaviour
         {
             currentMoney = 0;
         }
+    }
+
+    public void SetHunger(float amount)
+    {
+        hunger = amount;
     }
 
     public float GetHunger()
@@ -86,6 +96,11 @@ public class PlayerStats : MonoBehaviour
         {
             followers = 0;
         }
+    }
+
+    public void SetFollowers(int amount)
+    {
+        followers = amount;
     }
 
     public int GetFollowers()

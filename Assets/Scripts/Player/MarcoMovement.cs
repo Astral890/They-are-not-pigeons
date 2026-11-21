@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -174,5 +173,12 @@ public class marcoMovement : MonoBehaviour
         Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = !state;
         canMove = !state;
+    }
+
+    public void SetCamaraOnAudience()
+    {
+        transform.localRotation = Quaternion.Euler(0f, 30.589f, 0f);
+        xRotation = 17.01f;
+        cameraPivot.transform.localRotation = Quaternion.Euler(17.01f, 0f, 0f);
     }
 }

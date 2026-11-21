@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TheoryValidator theoryValidator;
     [SerializeField] private TheoryManager theoryManager;
     [SerializeField] private SpeechManager speechManager;
+    [SerializeField] private StoreTheories storeTheories;
     public int numDays = 1;
     public int followersReward = 0;
     [SerializeField] private HTTPHandler httpHandler;
@@ -26,6 +28,44 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         uiManager.BindPlayer(player);
+    }
+
+    private void Start()
+    {
+        if (SaveSystem.ExistsSave())
+        {
+            Cargar();
+        }
+    }
+
+    private void Guardar()
+    {
+        DatosGuardado datos = new DatosGuardado
+        {
+            currentMoney = player.GetMoney(),
+            hunger = player.GetHunger(),
+            followers = player.GetFollowers(),
+            cohesion = player.cohesion,
+            username = player.username,
+            conceptInfos = new List<ConceptInfo>(player.conceptInfos),
+            shopConcepts = new List<ConceptInfo>(storeTheories.shopConcepts),
+            datosUsuario = JsonUtility.FromJson<HTTPHandler.DatosUsuario>(JsonUtility.ToJson(httpHandler.datosUsuario))
+        };
+
+        SaveSystem.SaveGame(datos);
+    }
+
+    private void Cargar()
+    {
+        DatosGuardado datos = SaveSystem.LoadGame();
+        player.SetMoney(datos.currentMoney);
+        player.SetHunger(datos.hunger);
+        player.SetFollowers(datos.followers);
+        player.cohesion = datos.cohesion;
+        player.username = datos.username;
+        player.conceptInfos = new List<ConceptInfo>(datos.conceptInfos);
+        storeTheories.shopConcepts = new List<ConceptInfo>(datos.shopConcepts);
+        httpHandler.datosUsuario = JsonUtility.FromJson<HTTPHandler.DatosUsuario>(JsonUtility.ToJson(datos.datosUsuario));
     }
 
     public void giveMoney(int amount)
@@ -49,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void StartSpeech()
     {
+        playerMovement.SetCamaraOnAudience();
         playerMovement.SetTransitionState(true);
         isNight = true;
         uiManager.SetNight();

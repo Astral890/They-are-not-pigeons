@@ -5,7 +5,7 @@ public class StoreTheories : MonoBehaviour, InteractableE
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private List<ConceptInfo> shopConcepts;
+    [SerializeField] public List<ConceptInfo> shopConcepts;
     [SerializeField] private Transform itemsContainer;
     [SerializeField] private GameObject itemConceptPrefab;
     private bool isPlayerInside = false;
@@ -34,7 +34,7 @@ public class StoreTheories : MonoBehaviour, InteractableE
             playerRef.canOpenInventory = true;
             playerRef = null;
             isStoreOpen = false;
-            uiManager.SetStoreVisibility(isStoreOpen);
+            uiManager.SetStoreThoeriesVisibility(isStoreOpen);
         }
     }
 
