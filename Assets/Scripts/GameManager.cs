@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public int numDays = 1;
     public int followersReward = 0;
     [SerializeField] private HTTPHandler httpHandler;
+    [SerializeField] private SwapTrees treeSwap;
+    [SerializeField, Min(2)] private int daySwitch = 3;
+
 
     private void Awake()
     {
@@ -141,6 +144,12 @@ public class GameManager : MonoBehaviour
     public void NextDay()
     {
         numDays++;
+
+        if (numDays == daySwitch && treeSwap != null)
+        {
+            treeSwap.SwapPlaces();
+        }
+
         isNight = false;
         slot1.ClearSlot();
         slot2.ClearSlot();
