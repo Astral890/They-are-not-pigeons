@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI promptMsg;
     [SerializeField] private TextMeshProUGUI money;
     [SerializeField] private HungerUI hungerUI;
+    [SerializeField] private CohesionUI cohesionUI;
     [SerializeField] private GameObject shopPanel;
     [SerializeField] private marcoMovement player;
     [SerializeField] private GameObject InventoryPanel;
@@ -65,7 +66,14 @@ public class UIManager : MonoBehaviour
     public void BindPlayer(PlayerStats player)
     {
         player.OnHungerChanged += hungerUI.UpdateBar;
+        player.OnCohesionChanged += cohesionUI.UpdateBar;
         hungerUI.UpdateBar(player.GetHunger());
+        cohesionUI.UpdateBar(player.cohesion);
+    }
+
+    public void UpdateCohesionBar(int cohesion)
+    {
+        cohesionUI.UpdateBar(cohesion);
     }
 
     public void ShowSleepPanel()

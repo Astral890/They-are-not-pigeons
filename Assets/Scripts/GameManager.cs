@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TheoryManager theoryManager;
     [SerializeField] private SpeechManager speechManager;
     [SerializeField] private StoreTheories storeTheories;
+    [SerializeField] private ResultPanelUI resultPanel;
     public int numDays = 1;
     public int followersReward = 0;
     [SerializeField] private HTTPHandler httpHandler;
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void giveFollowers(int amount)
     {
+        if(amount == 0) player.UpdateCohesion(25);
         player.AddFollowers(amount);
         uiManager.updateFollowers(player.GetFollowers());
     }
@@ -156,6 +158,7 @@ public class GameManager : MonoBehaviour
         slot3.ClearSlot();
         theoryManager.ResetTheory();
         player.SetCurrentTheory("None");
+        if(numDays >= 10) resultPanel.Show(MatchOutcome.Victory, player.GetMoney(), player.GetFollowers(), numDays);
     }
 
     private void UploadUserInformation()

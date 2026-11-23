@@ -13,14 +13,20 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public string username = "Player";
     [SerializeField] private string currentTheory = "None";
     [SerializeField] public List<ConceptInfo> conceptInfos; 
+    [SerializeField] private ResultPanelUI resultPanel;
+    [SerializeField] private GameManager gameManager;
 
     public event Action<float> OnHungerChanged;
-
+    public event Action<int> OnCohesionChanged;
     private void Update()
     {
         if(hunger > 0f)
         {
             ReduceHunger();
+        }
+        else
+        {
+            resultPanel.Show(MatchOutcome.HungerDefeat, currentMoney, followers, gameManager.numDays);
         }
     }
     public void AddMoney(int amount)
@@ -36,6 +42,16 @@ public class PlayerStats : MonoBehaviour
     public int GetMoney()
     {
         return currentMoney;
+    }
+
+    public void UpdateCohesion(int amount)
+    {
+        this.cohesion -= amount;
+        OnCohesionChanged?.Invoke(this.cohesion);
+        if(this.cohesion <= 0)
+        {
+            resultPanel.Show(MatchOutcome.FollowersDefeat, currentMoney, followers, gameManager.numDays);
+        }
     }
 
     public void RemoveMoney(int amount)
