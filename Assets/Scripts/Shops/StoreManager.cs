@@ -8,6 +8,7 @@ public class StoreManager : MonoBehaviour, InteractableE
     [SerializeField] private List<ItemData> shopItems;
     [SerializeField] private Transform itemsContainer;
     [SerializeField] private GameObject itemCardPrefab;
+    [SerializeField] private GameObject tripod;
     private bool isPlayerInside = false;
     private marcoMovement playerRef;
     private bool isStoreOpen = false;
@@ -60,12 +61,16 @@ public class StoreManager : MonoBehaviour, InteractableE
             gameManager.takeMoney(item.price);
             if(item.itemType == "Food")
             {
-                gameManager.playerInventory.AddItem(item);
+                gameManager.player.eat(item.foodAmount);
             }
             else
             {
                 gameManager.moneyMultiplier += 0.5f;
                 gameManager.followersScale += 0.5f;
+                if(item.itemName == "Tripode")
+                {
+                    tripod.SetActive(true);
+                }
             }
         }
         else

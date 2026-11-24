@@ -9,4 +9,5 @@ public class ItemData : ScriptableObject
     public Sprite icon;
     public int price;
     public string itemType = "";
+    public int foodAmount;
 }

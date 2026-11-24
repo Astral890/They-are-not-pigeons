@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HTTPHandler httpHandler;
     [SerializeField] private SwapTrees treeSwap;
     [SerializeField, Min(2)] private int daySwitch = 3;
+    public bool playerHasPhone = false;
 
 
     private void Awake()
