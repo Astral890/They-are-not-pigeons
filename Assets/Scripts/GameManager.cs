@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
         slot3.ClearSlot();
         theoryManager.ResetTheory();
         player.SetCurrentTheory("None");
+        spawAudience.ClearAudiendie();
         if(numDays >= 10) resultPanel.Show(MatchOutcome.Victory, player.GetMoney(), player.GetFollowers(), numDays);
     }
 

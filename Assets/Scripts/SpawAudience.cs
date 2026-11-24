@@ -27,7 +27,7 @@ public class SpawnTransformListWrapper
 
 public class SpawAudience : MonoBehaviour
 {
-    [SerializeField] private GameObject audiencePrefab;
+    private List<GameObject> spawnedAudience = new List<GameObject>();
     public List<GameObject> audiencePrefabs;
     private Coroutine spawnAudienceCoroutine;
     [SerializeField] private float spawnInterval = 1f;
@@ -79,12 +79,32 @@ public class SpawAudience : MonoBehaviour
             Vector3 spawnPosition = spawnTransforms[currentIndex].ToVector3();
             Quaternion spawnRotation = spawnTransforms[currentIndex].ToQuaternion();
 
-            Instantiate(audiencePrefabs[currentIndex], spawnPosition, spawnRotation);
+            GameObject instance = Instantiate(audiencePrefabs[currentIndex], spawnPosition, spawnRotation);
+            spawnedAudience.Add(instance);
 
             currentIndex++;
 
             yield return new WaitForSeconds(spawnInterval);
         }
         spawnAudienceCoroutine = null;
+    }
+
+    public void ClearAudiendie()
+    {
+        if (spawnAudienceCoroutine != null)
+        {
+            StopCoroutine(spawnAudienceCoroutine);
+            spawnAudienceCoroutine = null;
+        }
+
+        foreach (GameObject obj in spawnedAudience)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+
+        spawnedAudience.Clear();
     }
 }

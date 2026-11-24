@@ -13143,11 +13143,12 @@ MonoBehaviour:
   theoryValidator: {fileID: 582381678}
   theoryManager: {fileID: 1568579238}
   speechManager: {fileID: 129735519}
-  storeTheories: {fileID: 0}
-  numDays: 1
+  storeTheories: {fileID: 710623547}
+  resultPanel: {fileID: 1754119312}
+  numDays: 2
   followersReward: 0
   httpHandler: {fileID: 162243310}
-  treeSwap: {fileID: 0}
+  treeSwap: {fileID: 1345651190}
   daySwitch: 3
 --- !u!4 &582381677
 Transform:
@@ -15228,6 +15229,7 @@ GameObject:
   - component: {fileID: 665540338}
   - component: {fileID: 665540339}
   - component: {fileID: 665540340}
+  - component: {fileID: 665540341}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -15254,6 +15256,7 @@ MonoBehaviour:
   promptMsg: {fileID: 1608455752}
   money: {fileID: 1325072640}
   hungerUI: {fileID: 665540338}
+  cohesionUI: {fileID: 665540341}
   shopPanel: {fileID: 267311945}
   player: {fileID: 1406870378}
   InventoryPanel: {fileID: 1065587728}
@@ -15413,6 +15416,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &665540341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665540332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79cf5a79519eac7919c06fe29ece1ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CohesionUI
+  cohesionBar: {fileID: 1085034785}
+  gameManager: {fileID: 582381676}
 --- !u!1 &666812980 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b85b1340459e2564b86bb57a8330db8a, type: 3}
@@ -29438,10 +29455,12 @@ MonoBehaviour:
   hunger: 100
   hungerDownMinute: 0
   followers: 0
-  cohesion: 50
+  cohesion: 100
   username: Player
   currentTheory: None
   conceptInfos: []
+  resultPanel: {fileID: 1754119312}
+  gameManager: {fileID: 582381676}
 --- !u!114 &1406870382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35670,9 +35689,9 @@ MonoBehaviour:
   victoryBackground: {fileID: 21300000, guid: 9a466ce59d051ea46880a8f8e9006cdb, type: 3}
   title: {fileID: 2041532249}
   description: {fileID: 942910032}
-  finalMoney: {fileID: 0}
-  finalFollowers: {fileID: 0}
-  daysPlayed: {fileID: 0}
+  finalMoney: {fileID: 1612988194}
+  finalFollowers: {fileID: 860763472}
+  daysPlayed: {fileID: 1664684734}
 --- !u!1001 &1759227002
 PrefabInstance:
   m_ObjectHideFlags: 0

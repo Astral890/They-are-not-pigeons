@@ -6,6 +6,7 @@ public class SleepUI : MonoBehaviour
 {
     [SerializeField] private Button nextDayButton;
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI dayText;
     [SerializeField] private TextMeshProUGUI followersText;
     [SerializeField] private TextMeshProUGUI followersGain;
     [SerializeField] private TextMeshProUGUI followersLoss;
@@ -13,6 +14,7 @@ public class SleepUI : MonoBehaviour
 
     public void SetUpPanelSleep()
     {
+        dayText.text = "Fin del día " + gameManager.numDays.ToString();
         moneyText.text = gameManager.player.GetMoney().ToString();
         followersText.text = gameManager.player.GetFollowers().ToString();
         changeFollowersQty(gameManager.followersReward);
