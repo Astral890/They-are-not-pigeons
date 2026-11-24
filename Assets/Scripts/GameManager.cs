@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void giveFollowers(int amount)
     {
-        if(amount == 0) player.UpdateCohesion(25);
+        if(amount <= 0) player.UpdateCohesion(25);
         player.AddFollowers(amount);
         uiManager.updateFollowers(player.GetFollowers());
     }
@@ -135,6 +135,12 @@ public class GameManager : MonoBehaviour
             float followersCalc = baseFollowers + (followersScale * Mathf.Sqrt(Mathf.Max(0,player.GetFollowers())));
             amount = Mathf.RoundToInt(followersCalc);
         }
+        else
+        {
+            int section = (int)Math.Round(player.GetFollowers() * 0.10f);
+            amount = UnityEngine.Random.Range(1,section+1)*-1;
+        }
+        Debug.Log("Random number: " + amount);
         return amount;
     }
 

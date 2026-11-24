@@ -2980,7 +2980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42b4a3dbafd568c1ba91065c710ca90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawAudience
-  audiencePrefab: {fileID: 6646708616278013030, guid: 1869030adda74ced2a86731dc41dfb5d, type: 3}
   audiencePrefabs:
   - {fileID: 5702364245058804942, guid: 165f0e8a65d98efd6bc6fd00a4e9a083, type: 3}
   - {fileID: 8254727255224788638, guid: 3f272ba7887f2f4fd8416b9113f1fc44, type: 3}
@@ -13145,7 +13144,7 @@ MonoBehaviour:
   speechManager: {fileID: 129735519}
   storeTheories: {fileID: 710623547}
   resultPanel: {fileID: 1754119312}
-  numDays: 2
+  numDays: 1
   followersReward: 0
   httpHandler: {fileID: 162243310}
   treeSwap: {fileID: 1345651190}
@@ -15390,6 +15389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SleepUI
   nextDayButton: {fileID: 1812622906}
   moneyText: {fileID: 506011726}
+  dayText: {fileID: 1933304648}
   followersText: {fileID: 1086561881}
   followersGain: {fileID: 2129423561}
   followersLoss: {fileID: 624843423}
@@ -29454,7 +29454,7 @@ MonoBehaviour:
   maxHunger: 100
   hunger: 100
   hungerDownMinute: 0
-  followers: 0
+  followers: 100
   cohesion: 100
   username: Player
   currentTheory: None
