@@ -139,13 +139,13 @@ public class marcoMovement : MonoBehaviour
 
     private void OnOpenInventory(InputAction.CallbackContext context)
     {
-        if (canOpenInventory)
+        /*if (canOpenInventory)
         {
             isUIOpen = !isUIOpen;
             gameManager.uiManager.OpenInventory(isUIOpen);
             LockCursor(isUIOpen);
             isInventoryOpen = !isInventoryOpen;
-        }
+        }*/
     }
 
     public void SetCurrentInteractable(InteractableE interactable)

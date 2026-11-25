@@ -15,4 +15,4 @@ MonoBehaviour:
   idTheory: 1
   description: Colores
   theory: "La fuente cambia seg\xFAn tus pensamientos"
-  cost: 1
+  cost: 0

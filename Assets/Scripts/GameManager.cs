@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int baseFollowers = 3;
-    [SerializeField] public float followersScale = 0.8f;
-    [SerializeField] private int baseMoney = 5;
-    [SerializeField] public float moneyMultiplier = 3.5f;
+    [SerializeField] private int baseFollowers = 9;
+    [SerializeField] public float followersScale = 3.5f;
+    [SerializeField] private int baseMoney = 23;
+    [SerializeField] public float moneyMultiplier = 6.5f;
     [SerializeField] private TheorySlot slot1;
     [SerializeField] private TheorySlot slot2;
     [SerializeField] private TheorySlot slot3;

@@ -15,4 +15,4 @@ MonoBehaviour:
   idTheory: 4
   description: "Ubicaci\xF3n"
   theory: Los puentes cambian de lugar durante la noche
-  cost: 0
+  cost: 3

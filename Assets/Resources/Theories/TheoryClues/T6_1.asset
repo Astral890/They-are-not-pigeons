@@ -15,4 +15,4 @@ MonoBehaviour:
   idTheory: 6
   description: Gobierno
   theory: Los gatos, mugrosos gatos
-  cost: 0
+  cost: 5

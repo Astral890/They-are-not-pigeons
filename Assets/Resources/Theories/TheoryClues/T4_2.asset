@@ -15,4 +15,4 @@ MonoBehaviour:
   idTheory: 4
   description: Dimensiones
   theory: Los puentes cambian de lugar durante la noche
-  cost: 0
+  cost: 3

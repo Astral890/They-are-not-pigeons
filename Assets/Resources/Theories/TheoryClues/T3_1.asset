@@ -15,4 +15,4 @@ MonoBehaviour:
   idTheory: 3
   description: Paloma
   theory: "La paloma es un dron esp\xEDa"
-  cost: 0
+  cost: 2

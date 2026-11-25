@@ -15,4 +15,4 @@ MonoBehaviour:
   idTheory: 2
   description: Equilibrio
   theory: La fuente mantiene el equilibrio de la plaza
-  cost: 0
+  cost: 1
