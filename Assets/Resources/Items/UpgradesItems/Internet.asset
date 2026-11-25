@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Internet Starlink
   description: Internet chido
   icon: {fileID: -1082082671, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 500
+  price: 75
   itemType: Upgrade
+  foodAmount: 0

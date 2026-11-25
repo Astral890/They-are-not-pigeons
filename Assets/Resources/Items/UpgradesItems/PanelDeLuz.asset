@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Panel de luz
   description: Un panel que ilumina
   icon: {fileID: -1608351743, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 250
+  price: 100
   itemType: Upgrade
+  foodAmount: 0

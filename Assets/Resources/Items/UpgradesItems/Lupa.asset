@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Lupa
   description: Una lupa que hace los objetos mas grandes
   icon: {fileID: -50097627, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 75
+  price: 30
   itemType: Upgrade
+  foodAmount: 0

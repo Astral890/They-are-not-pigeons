@@ -31308,8 +31308,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   currentMoney: 0
   maxHunger: 100
-  hunger: 100
-  hungerDownMinute: 10
+  hunger: 1
+  hungerDownMinute: 0
   followers: 0
   cohesion: 100
   username: Player

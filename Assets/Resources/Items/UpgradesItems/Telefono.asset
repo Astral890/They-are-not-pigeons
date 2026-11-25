@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Telefono nuevo
   description: "Un telefono de ultima generacion\t"
   icon: {fileID: -736467587, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 750
+  price: 200
   itemType: Upgrade
+  foodAmount: 0

@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Aro de luz
   description: Un aro de luz
   icon: {fileID: -2053900967, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 350
+  price: 70
   itemType: Upgrade
+  foodAmount: 0

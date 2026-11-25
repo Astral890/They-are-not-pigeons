@@ -4,6 +4,7 @@ public class SpeechManager : MonoBehaviour, InteractableE
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private UIManager uiManager;
+    public bool speachAlready = false;
     private bool isPlayerInside = false;
     private marcoMovement playerRef;
     private bool isSpeechActive = false;
@@ -37,15 +38,25 @@ public class SpeechManager : MonoBehaviour, InteractableE
     public void Interact()
     {
         Debug.Log("Interacting with SpeechManager");
-        if(isPlayerInside && !isSpeechActive)
+        if(isPlayerInside && !isSpeechActive && !speachAlready)
         {
             isSpeechActive = true;
+            gameManager.uiManager.showPromptText("");
             gameManager.StartSpeech();
         }
     }
     public string GetPromptMsg()
     {
-        return "Presiona E para empezar con el discurso";
+        string tmp = "";
+        if (!speachAlready)
+        {
+            tmp = "Presiona E para empezar con el discurso";
+        }
+        else
+        {
+            tmp = "Ya diste un discurso";
+        }
+        return tmp;
     }
 
     public void ResetStatus()

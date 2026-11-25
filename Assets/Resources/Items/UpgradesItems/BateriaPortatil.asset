@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Bateria portatil
   description: Una bateria que se puede portar
   icon: {fileID: 402354649, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 200
+  price: 80
   itemType: Upgrade
+  foodAmount: 0

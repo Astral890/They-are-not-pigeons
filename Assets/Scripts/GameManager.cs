@@ -98,13 +98,16 @@ public class GameManager : MonoBehaviour
         playerMovement.SetCamaraOnAudience();
         playerMovement.SetTransitionState(true);
         isNight = true;
+        speechManager.speachAlready = true;
         uiManager.SetNight();
         spawAudience.StartSpawningAudience();
 
     }
 
+    //hola
     public void EndSpeech()
     {
+        uiManager.showPromptText("Ya diste un discurso");
         playerMovement.SetTransitionState(false);
         speechManager.ResetStatus();
         GiveRewardsSpeech();
@@ -165,6 +168,7 @@ public class GameManager : MonoBehaviour
         slot3.ClearSlot();
         theoryManager.ResetTheory();
         player.SetCurrentTheory("None");
+        speechManager.speachAlready = false;
         spawAudience.ClearAudiendie();
         if(numDays >= 10) resultPanel.Show(MatchOutcome.Victory, player.GetMoney(), player.GetFollowers(), numDays);
     }

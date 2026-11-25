@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Megafono
   description: Un megafono
   icon: {fileID: 243820564, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 100
+  price: 60
   itemType: Upgrade
+  foodAmount: 0

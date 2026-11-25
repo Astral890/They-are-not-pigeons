@@ -16,5 +16,6 @@ MonoBehaviour:
   itemName: Control Remoto
   description: Un control que controla de forma remota
   icon: {fileID: 1629083152, guid: 056a04923549ce439a990a71d9b56d42, type: 3}
-  price: 100
+  price: 30
   itemType: Upgrade
+  foodAmount: 0
