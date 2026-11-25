@@ -114,7 +114,7 @@ public class HTTPHandler : MonoBehaviour
     public void UploadUser(Action onComplete = null)
     {
         if (transactionInProgress) return;
-        StartCoroutine(CrearUsuario("http://10.1.124.97:8080/api/usuarios/acceso", onComplete));
+        StartCoroutine(CrearUsuario("http://192.168.100.34:8080/api/usuarios/acceso", onComplete));
     }
 
     private IEnumerator CrearUsuario(string url, Action onComplete)
@@ -151,7 +151,7 @@ public class HTTPHandler : MonoBehaviour
     public void UploadStats(Action onComplete = null)
     {
         if (transactionInProgress || datosUsuario.idUsuario == 0) return;
-        StartCoroutine(ActualizarEstadisticas("http://10.1.124.97:8080/api/usuarios/", onComplete));
+        StartCoroutine(ActualizarEstadisticas("http://192.168.100.34:8080/api/usuarios/", onComplete));
     }
 
     private IEnumerator ActualizarEstadisticas(string url, Action onComplete)
@@ -185,7 +185,7 @@ public class HTTPHandler : MonoBehaviour
     public void AsingVideoToUser(string theory)
     {
         if( transactionInProgress || datosUsuario.idUsuario == -1) return;
-        StartCoroutine(AsignarVideoAJugador("http://10.1.124.97:8080/api/usuarios/",theory));
+        StartCoroutine(AsignarVideoAJugador("http://192.168.100.34:8080/api/usuarios/", theory));
     }
 
     private IEnumerator AsignarVideoAJugador(string url, string theory)

@@ -16072,7 +16072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &679185760
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29833,8 +29833,8 @@ MonoBehaviour:
   currentMoney: 0
   maxHunger: 100
   hunger: 100
-  hungerDownMinute: 0
-  followers: 100
+  hungerDownMinute: 10
+  followers: 0
   cohesion: 100
   username: Player
   currentTheory: None

@@ -44,7 +44,7 @@ public class PutPhone : MonoBehaviour, InteractableE
 
     public void Interact()
     {
-        if (!gameManager.playerHasPhone) return;
+        if (!gameManager.playerHasPhone && isPlayerInside) return;
         phoneOnTripod.SetActive(true);
         playerRef.SetCurrentInteractable(null);
         playerRef.UpdatePromptUI();
